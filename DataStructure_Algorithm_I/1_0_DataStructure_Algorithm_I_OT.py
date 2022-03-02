@@ -44,7 +44,7 @@
                         - f(n) >= cg(n) for n >= n_0
             (2) Pseudocode
                 1] high level description
-                2] Evaluate algorithm indepent of the SW/HW
+                2] Evaluate algorithm independent of the SW/HW
     3. Object Oriented Programming
         1) Object
             (1) ##created : instance of a class

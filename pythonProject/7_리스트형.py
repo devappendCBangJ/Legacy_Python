@@ -9,6 +9,7 @@
 # 원소 추가 : list.append(원소)
 # 원소 추가 : list.insert(리스트 인덱스, 원소)
 # 원소 제거 : list.remove(원소)
+# 원소 제거 : del list[리스트 인덱스]
 # 원소 모두 제거 : list.clear()
 
 # 원소 복붙 : list1 = list2.copy() >> [원소2]

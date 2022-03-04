@@ -68,19 +68,80 @@
                     [1] base class : existing class
                     [2] subclass = child class : newly defined class
 
-● Data Structure Kind
-    1. Recursive method
-        1) ##Concept : call 반복 >> return 반복
-            def factorial(n):
-                if n == 0:
-                    return 1
-                else:
-                    return n * factorial(n-1)
-        2) ##ex
-            (1) Binary Search
-                1] ##Conditions
-                    - Data : ordered form
-                2] ##Concept : half & half reduce search
-                3] ##Characteristics
-                    [1] Big-Oh : O(logn)
+● Data Structure
+    1. Kind
+        1) Recursive method
+            (1) ##Concept : call 반복 >> return 반복
+                def factorial(n):
+                    if n == 0:
+                        return 1
+                    else:
+                        return n * factorial(n-1)
+            (2) ##ex
+                1] Binary Search
+                    [1] ##Conditions
+                        - Data : ordered form
+                    [2] ##Concept : half & half reduce search
+                    [3] ##Characteristics
+                        - Big-Oh : O(logn)
+
+    2. Memory manangement
+        1) Computer Architecture(x86)
+            (1) 구조
+                1] 부품
+                    [1] Ports, CD-ROM, Floppy Drive
+                    [2] RAM : 주소 저장. 휘발성o
+                    [3] ROM : 휘발성x
+                    [4] register
+                    [5] CPU
+
+                    - speed : HDD < RAM < register
+                    - capability : register < RAM < HDD
+
+                2] 로더
+                    1] Boot Loader
+                    2] Program Loader : ex. excel
+                    3] Class Loader : ex. java의 class
+
+                3] CPU
+                    CPU <-> RAM
+
+                    - fetch & excute cycle
+                    - indexing of current program position
+                        1] page faults : page not currently present in RAM
+                            -> Use Virtual memory : idealized abstraction of the storage resources
+                                Virtual memory <-> Physical memory
+
+    3. List : Array-Based Sequences
+        (1) 저장 구조
+            1] sequence type : a set of memory locations
+                [1] list
+                [2] tuple
+                [3] str
+
+            2] 저장 방법
+                [1] array list
+                    1]] char arrays
+                        [[1]] elements : store primitive elements
+                        [[2]] reference : store references to objects
+                    2]] intger arrays
+                        [[1]] elements
+                        [[2]] reference : 형식으로 저장하는 것보다 주소형태로 저장하는 것이 유리
+                [2] linked list
+                    
+        (2) 활용
+            1] insertion
+                - 해당 인덱스부터 한칸씩 뒤로 밀음 + 해당 원소 삽입
+                - 시간복잡도 : O(n)
+
+                [1] Incremental strategy : size + constant c
+                    - n + c + 2c + ... + kc
+                    - T(n) = O(n + k^2)
+                [2] Doubling strategy : size x2
+                    - T(n) = O(n)
+            2] remove
+                - 해당 원소 제거 + 해당 인덱스 뒤부터 한칸씩 앞으로 당김
+                - 시간복잡도 : O(n)
+
+
 """

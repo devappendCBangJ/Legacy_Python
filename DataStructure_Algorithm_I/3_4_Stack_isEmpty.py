@@ -9,20 +9,21 @@ def isStackFull():
 def isStackEmpty():
 	global SIZE, stack, top
 
-	if(top == -1):
+	if(top <= -1):
 		return True
 	else:
 		return False
 SIZE = 5
 stack = [None for _ in range(SIZE)]
 top = -1
-		
+
 def push(value):
 	global SIZE, stack, top
 	if (isStackFull() == True):
-		print("Error")
+		print("Stack is Full!!")
+		return
 	else:
 		top = top + 1
-		stack[top] = value	
+		stack[top] = value
 
 print("check the empty statement?", isStackEmpty())

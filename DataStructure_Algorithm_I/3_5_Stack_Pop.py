@@ -40,6 +40,6 @@ top = 0
 
 print(stack)
 retData = pop()
-print("return data", retData)
+print("return data : ", retData)
 print(stack)
 retData = pop()

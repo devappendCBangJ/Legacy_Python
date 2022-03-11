@@ -14,7 +14,7 @@ for i in data5:
     print("{:3}".format(i), end=" ") # 무조건 3자리 차지, 끝부분 띄워쓰기
     cnt += 1
     if cnt % 28 == 0: # mnist는 28*28의 csv이므로 28개의 열만 표시되게 설정
-        print()
+        print() # 줄바꿈
 
 # 일반 데이터를 리스트 자료형으로 변환
 data4 = data4.split()
@@ -25,4 +25,4 @@ for i in data4:
     print("{:3}".format(i), end=" ") # 무조건 3자리 차지, 끝부분 띄워쓰기
     cnt += 1
     if cnt % 28 == 0: # mnist는 28*28의 csv이므로 28개의 열만 표시되게 설정
-        print()
+        print() # 줄바꿈

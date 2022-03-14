@@ -1,7 +1,7 @@
 def isStackFull():
 	global SIZE, stack, top
 
-	if(top >= SIZE - 1):
+	if(top >= SIZE - 1): # 안전한 코드
 		return True
 	else:
 		return False

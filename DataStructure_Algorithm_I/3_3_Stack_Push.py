@@ -1,7 +1,7 @@
 def isStackFull():
 	global SIZE, stack, top
 
-	if(top >= SIZE - 1):
+	if(top >= SIZE - 1): # 안전한 코드
 		return True
 	else:
 		return False
@@ -12,8 +12,7 @@ def push(value):
 		print("Error")
 	else:
 		top = top + 1
-		stack[top] = value	
-
+		stack[top] = value
 
 SIZE = 5
 stack = ['A', 'B', 'C', 'D', None]

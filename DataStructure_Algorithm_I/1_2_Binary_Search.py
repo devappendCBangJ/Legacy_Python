@@ -14,7 +14,7 @@ def binary_search(data, target, low, high):
     if low > high:
         return False
     else:
-        mid = (low + high) // 2
+        mid = (low + high) // 2 # // : 몫만 취함
         if(target == data[mid]):
             return mid
         elif(target < data[mid]):

@@ -1,3 +1,5 @@
+# 시간 복잡도 좋다
+
 originData = list(map(int, input().split()))
 destData = []
 

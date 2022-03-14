@@ -19,7 +19,7 @@ def delete_data(position):
 
     kLen = len(data)
     data[position] = None
-    for i in range(position+1, kLen):
+    for i in range(position+1, kLen): # kLen-1 : 마지막 인덱스
 	    data[i-1] = data[i]
 	    data[i] = None
     del data[kLen-1]

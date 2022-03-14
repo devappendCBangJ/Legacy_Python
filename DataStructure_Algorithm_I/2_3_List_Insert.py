@@ -7,7 +7,7 @@ def insert_data(position, name):
 
 	data.append(None)
 	kLen = len(data)
-	for i in range(kLen-1, position,-1):
+	for i in range(kLen-1, position,-1): # kLen-1 : 마지막 인덱스
 		data[i] = data[i-1]
 		data[i-1] = None
 	data[position] = name

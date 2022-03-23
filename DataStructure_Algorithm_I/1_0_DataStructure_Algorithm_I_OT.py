@@ -242,5 +242,107 @@
                 2] Circular Queue : circular queue
             (3) Python : 강의자료 참조
 
+    6. Linked List
+        1) Singly linked list
+            (1) 특징
+                1] 구조 : 노드(head) >> 노드 >> 노드 >> ... >> Null
+                    - 노드 : 원소 + 다음 주소
+                    - 원소 : 데이터
+                    - next 주소 : 다음 데이터 위치
+                2] 비교
+                    [1] 기존 list
+                        - memory 뭉탱이 할당
+                        - 용량 초과시 copy & paste
+                    [2] Singly linked list
+                        - memory 공간 2배 할당
+                        - 필요할 때마다 node 만들어 사용
+            (2) 연산
+                1] Inserting at Head
+                    [1] 새 노드 할당
+                    [2] 새 노드에 원소 삽입
+                    [3] 새 노드 주소가 기존 Head 가르킴
+                    [4] 새 노드를 Head로 지목
+                    - 순서 지키지 않으면 link 잃어버릴 가능성 높음
+                    - temp로 기억하고 있다면, 상관 없음
+                1] Removing at Head
+                    [1] Head를 다음 노드로 지목
+                    [2] Garbage Collector가 기존 Head 제거
+                        - 메모리 공간에 떠돌아 다닐 수 있으므로 Garbage Collector로 제거
+                2] Inserting at Tail
+                    [1] 새 노드 할당
+                    [2] 새 노드에 원소 삽입
+                    [3] 새 노드 주소가 Null 가르킴
+                    [4] 기존 Tail 노드 주소가 새 노드 가르킴
+                    [5] 새 노드를 Tail로 지목
+                2] Removing at Tail
+                    [1] Head부터 Tail까지 가면서 previous 기억
+                    [2] Tail 노드가 나오면 previous 노드의 주소가 Null 가리킴
+                    [3] Garbage Collector가 기존 Tail 제거
+                    - Singly linked list의 단점
+                        Head부터 Tail까지 가면서 previous 기억해야함
+                        이전노드가 Tail을 끊기 위해 다시 이전노드로 돌아가야하는데, Tail노드에서는 이전노드의 주소를 알 수 없기 때문이다.
+                3] Inserting at Middle
+                    [1] Head부터 Tail까지 가면서 previous 기억
+                    [2] 새 노드 할당
+                    [3] 새 노드에 원소 삽입
+                    [4] 새 노드 주소가 Middle 노드 가리킴
+                    [5] previous 노드 주소가 새 노드 가리킴
+                3] Removing at Middle
+                    [1] Head부터 Tail까지 가면서 previous 기억
+                    [2] Middle 노드가 나오면 previous 주소가 Middle+1 노드 가리킴
+                    [3] Garbage Collector가 기존 Middle 제거
+            (3) 활용
+                1] Linked list stack
+                    - top element : first node
+                        Singly linked list의 단점으로 인해 first node를 빼는 용도로 사용
+                    - Space : O(n)
+                    - Stack ADT : O(1)
+                2] Linked list queue
+                    - rear element : first node
+                        Singly linked list의 단점으로 인해 first node를 빼는 용도로 사용
+                    - front element : last node
+                    - Space : O(n)
+                    - Stack ADT : O(1)
 
+        2) Doubly linked list
+            (1) 특징
+                1] 구조 : header >> 노드 >> 노드 >> 노드 >> ... >> trailer
+                    - 노드 : 이전 주소 + 원소 + 다음 주소
+                    - previous 주소 : 이전 데이터 위치
+                    - 원소 : 데이터
+                    - next 주소 : 다음 데이터 위치
+                2] 비교
+                    [1] 기존 list
+                        - memory 뭉탱이 할당
+                        - 용량 초과시 copy & paste
+                    [2] Singly linked list
+                        - memory 공간 2배 할당
+                        - 필요할 때마다 node 만들어 사용
+                    [3] Doubly linked list
+                        - memory 공간 3배 할당
+                        - 필요할 때마다 node 만들어 사용
+            (2) 연산
+                1] insertion
+                    [1] 이전 노드의 next 주소가 새 노드 가리킴
+                    [2] 다음 노드의 previous 주소가 새 노드 가리킴
+                2] deletion
+                    [1] 이전 노드의 next 주소가 삭제 다음 노드 가리킴
+                    [2] 다음 노드의 previous 주소가 이전 노드 가리킴
+                    [3] Garbage Collector가 기존 노드 제거
+            (3) 활용
+                - Space : O(n)
+                - Stack ADT : O(1)
+                >> 매우 빠름 but 일반 list, Singly linked list보다 느림
+                1] Positional list : 이름으로 위치 나타냄
+        3) 총정리
+            (1) 일반 list
+                - 메모리 공간 1배
+            (2) singly linked list
+                - 메모리 공간 2배
+                - 역방향 불가능. 한쪽 방향 원소 조작 용이
+                - head, middle, tail 노드에서 각기 다른 방식 연산
+            (3) doubly linked list
+                - 메모리 공간 3배
+                - 역방향 가능. 양쪽 방향 원소 조작 용이
+                - 모든 노드에서 동일한 방식 연산
 """

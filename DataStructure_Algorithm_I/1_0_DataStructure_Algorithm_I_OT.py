@@ -345,4 +345,147 @@
                 - 메모리 공간 3배
                 - 역방향 가능. 양쪽 방향 원소 조작 용이
                 - 모든 노드에서 동일한 방식 연산
+
+    7. Tree
+        1) 특징
+            (1) 계층 구조의 추상적 모델
+            (2) 각 노드 : 부모 관계
+        2) 예시 ♣♣♣
+            - 조직 차트
+            - 파일 시스템
+            - 프로그래밍 환경
+        3) 용어 ♣♣♣
+            (1) Root : 부모 없는 노드
+            (2) Internal node : 적어도 1개 자식 있는 노드(root도 Internal node이다)
+            (3) External node : 자식 없는 노드
+
+            (1) Depth of a node : 조상의 개수
+            (2) Height of a node : 노드의 최대 Depth
+
+            (1) subtree
+
+            - ancestors of a node : 부모, 조부모, 조조부모, ...
+            - descendant of a node : 자식, 손자, 손손자, ...
+        4) 구현 방법
+            (1) list
+            (2) linked list
+        5) Tree ADT ♣♣♣
+            (1) 포괄적 메소드(Generic methods)
+                - Integer len()
+                - Boolean is_empty()
+                - Iterator position()
+                - Iterator iter()
+            (2) 접근자 메소드(Accessor methods)
+                - Position root()
+                - Position parent(p)
+                - Iterator children(p)
+                - Integer num_children(p)
+            (3) 질문 메소드(Query methods)
+                - Boolean is_leaf(p)
+                - Boolean is_root(p)
+            (4) 업데이트 메소드(Update methods)
+                - Element replace(p, o)
+        6) 적용
+            (1) Tree Traversal
+                1] 특징 ♣♣♣
+                    - 모든 노드 1번씩 방문
+                2] 종류 ♣♣♣ 좀 어렵네
+                    [1] Preorder traversal : VLR(root -> left -> right)
+                        - 특징 : root가 가장 먼저
+                        - ex. 구조화된 문서 출력
+                    [2] Inorder traversal : LVR(left -> root -> right)
+                        - 특징 : root가 중간
+                    [3] Postorder traversal : LRV(left -> right -> root)
+                        - 특징 : root가 마지막
+                        - ex. 폴더 내 파일 사용 공간 계산
+                3] 구현
+                    [1] Preorder Traversal
+                        Algorithm preOrder(v)
+                            visit(v)
+                            for each child w of v
+                                preOrder(w)
+                    [3] Postorder Traversal
+                        Algorithm postOrder(v)
+                            for each child w of v
+                                postOrder(w)
+                            visit(v)
+            (2) Binary Trees
+                1] 특징 ♣♣♣
+                    [1] 각 node : 최대 2개 자식(ordered pair = left node, right node)
+                    [2] e = i + 1
+                    [2] n = 2e - 1 = i + e
+                    [2] h >= log_2(e)
+                    [3] edge의 개수 : n - 1개
+                        - root를 제외한 모든 node에 부모로 이어지는 edge 존재
+                    - n : node의 개수
+                    - e : external nodes의 개수
+                    - i : internal nodes의 개수
+                    - h : height
+                2] 종류
+                    [1] Binary tree : 일반적 tree
+                    [2] Full binary tree : 모든 level에서 꽉찬 tree
+                    [3] Complete binary tree : 마지막 level에서 조금 비어있는 tree ♣♣♣
+                3] 예시 ♣♣♣
+                    - 산수(arithmetic expressions)
+                        Internal node : 연산자
+                        External node : 피연산자
+                        ex. 2 x (a - 1) + (3 x b)
+                    - decision processes
+                        Internal node : yes or no로 대답가능한 질문
+                        External node : 선택 시 결과
+                        ex. dining decision
+                    - searching
+                4] 구현 ♣♣♣
+                    [1] Inorder Traversal - Binary Tree
+                        Algorithm inOrder(v)
+                            if v has a left child
+                                inOrder(left(v))
+                            visit(v)
+                            if v has a right child
+                                inOrder(right(v))
+                    [2] Print Arithmetic Expressions(Inorder traversal) - Binary Tree
+                        Algorithm printExpression(v)
+                            if v has a left child
+                                print("(")
+                                printExpression(left(v))
+                            print(v.element())
+                            if v has a right child
+                                printExpression(right(v))
+                                print(")")
+                    [2] Print Arithmetic Expressions(recursive)(Postorder traversal) - Binary Tree
+                        Algorithm evalExpr(v)
+                            if is_leaf(v)
+                                return v.element()
+                            else
+                                x <- evalExpr(left(v))
+                                y <- evalExpr(right(v))
+                                o <- operator stored at v
+                                return x o y
+                    [3] Euler Tour Traversal - Binary Tree
+                        - 최대 3번 방문
+                        1]] preorder : on the left
+                        2]] inorder : from below
+                        3]] postorder : on the right
+                        
+                        1]] 자식 0개 node : 1번 방문
+                        2]] 자식 1개 node : 2번 방문
+                        3]] 자식 2개 node : 3번 방문
+                    [4] Linked Structure - Binary Tree(1개 노드 당 3개 공간)
+                        - 3가지 저장
+                            데이터
+                            부모 노드
+                            자식 노드
+                    [4] Linked Structure - Binary Tree(1개 노드 당 4개 공간)
+                        - 4가지 저장
+                            데이터
+                            부모 노드
+                            왼쪽 자식 노드
+                            오른쪽 자식 노드
+                    [4] Array based Binary Tree
+                        - Full binary tree : 효율성 높음
+                        - 듬성듬성한 binary tree : 효율성 낮음
+
+                        - root node = 1
+                        - parent node의 왼쪽 자식 = parent node x 2
+                        - parent node의 오른쪽 자식 = parent node x 2 + 1
 """

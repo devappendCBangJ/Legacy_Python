@@ -46,6 +46,27 @@ def insertNode(findData, insertData):
 	node.data = insertData
 	current.link = node
 
+# 노드 delete
+def deleteNode(deleteData):
+	global memory, head, current, pre
+
+	# 첫 노드 delete
+	if head.data == deleteData:
+		current = head
+		head = head.link
+		del(current)
+		return
+	current = head
+
+	# 중간 노드 delete
+	while current.link !=None:
+		pre = current	# 이전 노드 기억
+		current = current.link
+		if current.data == deleteData:
+			pre.link = current.link
+			del(current)
+			return
+
 # 데이터 초기화
 memory = []
 head, current, pre = None, None, None
@@ -75,4 +96,13 @@ if __name__ == "__main__":
 	printNodes(head)
 
 	insertNode("Donald", "Michael")
+	printNodes(head)
+
+	deleteNode("Alice")
+	printNodes(head)
+
+	deleteNode("Edward")
+	printNodes(head)
+
+	deleteNode("Edward")
 	printNodes(head)

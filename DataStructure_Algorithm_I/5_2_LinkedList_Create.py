@@ -1,8 +1,10 @@
+# 노드 Class
 class Node():
 	def __init__(self):
 		self.data = None
 		self.link = None
 
+# 노드 생성 + 데이터 기입 + 링크 연결
 node1 = Node()
 node1.data = 30
 

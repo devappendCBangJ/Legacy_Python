@@ -11,7 +11,7 @@ def bucket_sort(input_list):
     buckets_list = []
     for x in range(len(input_list)):
         buckets_list.append([]) # [[], [], [], [], []]꼴 2차원 배열 생성
-    print(buckets_list)
+    # print(buckets_list) # 확인용 코드
 
     # 해당 bucket list에 input list의 원소 분류
     for i in range(len(input_list)):

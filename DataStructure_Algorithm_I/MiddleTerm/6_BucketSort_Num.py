@@ -49,6 +49,6 @@ sorted_list = bucket_sort(input_list)
 print('SORTED LIST:')
 print(sorted_list)
 
-start = time.time()
+start = time.time_ns()
 bucket_sort(input_list)
-end = time.time()
+end = time.time_ns()

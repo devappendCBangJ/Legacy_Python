@@ -1,27 +1,40 @@
 import time
 
-def quick_sort(arr):
+import time
+
+def merge_sort(arr):
     def sort(low, high):
-        if(low < high): # low와 high가 같아지는 경우 : 배열에 원소가 1개만 있을때 ♣
-            # pivot보다 작은 숫자 구역, pivot보다 큰 숫자 구역별 원소 분류. reculsive하게 반복(pivot 자체는 sorting에 참여 x)
-            pivot_idx = partition(low, high)
-
+        if low < high: # low와 high가 같아지는 경우 : 배열에 원소가 1개만 있을때 ♣
             # 배열 2등분 reculsive하게 반복
-            sort(low, pivot_idx - 1)
-            sort(pivot_idx + 1, high)
+            mid = (low + high) // 2
+            sort(low, mid)
+            sort(mid + 1, high)
 
-    def partition(low, high):
-        pivot = arr[low] # pivot 선택
-        m = low # S1, S2가 비워진 상태에서 시작
+            # 2등분된 배열 조각들끼리 원소들간 비교 + sorting + merge 반복
+            merge(low, mid, high)
 
-        for k in range(low + 1, high + 1): # pivot보다 큰 인덱스부터 시작해서, 마지막 인덱스까지 순회 ♣
-            if(arr[k] < pivot): # case2(pivot보다 더 작은 원소인 경우) : swap o, case1(pivot보다 더 큰 원소인 경우) : swap x
-                m += 1
-                arr[k], arr[m] = arr[m], arr[k]
+    def merge(low, mid, high):
+        temp = [] # 임시 배열
+        n = high - low + 1 # 배열 원소 개수
+        left, right = low, mid + 1
+
+        while left <= mid and right <= high: # 배열 절반 쪼갬. 두 배열끼리 첫번째 인덱스부터 비교. 작은 것을 임시배열에 담음
+            if arr[left] <= arr[right]:
+                temp.append(arr[left])
+                left += 1
             else:
-                pass
-        arr[low], arr[m] = arr[m], arr[low] # pivot 위치로 swap o
-        return m
+                temp.append(arr[right])
+                right += 1
+
+        while left <= mid: # 두 배열 중 한 배열이 남으면 전부 순서대로 임시배열에 담음
+            temp.append(arr[left])
+            left += 1
+        while right <= high:
+            temp.append(arr[right])
+            right += 1
+
+        for i in range(n): # 임시 배열 원소를 기존 배열로 붙여넣기
+            arr[low + i] = temp[i]
 
     return sort(0, len(arr) - 1)
 
@@ -39,7 +52,7 @@ for i in range(repeat):
             arr.append(line.strip('\n'))
     # 시간 측정
     start = time.time_ns()
-    quick_sort(arr)
+    merge_sort(arr)
     end = time.time_ns()
     tot_time += (end - start)
 tot_time = tot_time / 1000000000 / repeat # ns로 계산했으므로 초단위로 변경. repeat만큼 반복했으므로 1회 평균 계산

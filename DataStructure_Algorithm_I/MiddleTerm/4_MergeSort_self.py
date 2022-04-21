@@ -12,24 +12,28 @@ def merge_sort(arr):
             merge(low, mid, high)
 
     def merge(low, mid, high):
-        temp = [] # 임시 배열
+        temp = [0] * 1001 # 임시 배열
         n = high - low + 1 # 배열 원소 개수
         left, right = low, mid + 1
+        k = 0
 
         while left <= mid and right <= high: # 배열 절반 쪼갬. 두 배열끼리 첫번째 인덱스부터 비교. 작은 것을 임시배열에 담음
             if arr[left] <= arr[right]:
-                temp.append(arr[left])
+                temp[k] = (arr[left])
                 left += 1
             else:
-                temp.append(arr[right])
+                temp[k] = (arr[right])
                 right += 1
+            k += 1
 
         while left <= mid: # 두 배열 중 한 배열이 남으면 전부 순서대로 임시배열에 담음
-            temp.append(arr[left])
+            temp[k] = (arr[left])
             left += 1
+            k += 1
         while right <= high:
-            temp.append(arr[right])
+            temp[k] = (arr[right])
             right += 1
+            k += 1
 
         for i in range(n): # 임시 배열 원소를 기존 배열로 붙여넣기
             arr[low + i] = temp[i]

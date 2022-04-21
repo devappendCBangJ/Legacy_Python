@@ -2,10 +2,10 @@ import time
 
 # 버블 정렬
 def bubble_sort(arr):
-        for i in range(len(arr)):
-            for j in range(0, len(arr)-i-1):
-                if arr[j+1] < arr[j]:
-                    arr[j], arr[j+1] = arr[j+1], arr[j]
+    for i in range(len(arr)):
+        for j in range(0, len(arr)-i-1):
+            if arr[j+1] < arr[j]:
+                arr[j], arr[j+1] = arr[j+1], arr[j]
 
  # Average Filter : 실행 시간 계속 달라지므로 여러번 반복하여 평균 취함
 tot_time = 0

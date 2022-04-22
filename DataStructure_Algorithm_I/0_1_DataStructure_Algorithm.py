@@ -256,6 +256,8 @@
         1) 개념 : method가 자기 자신을 call
         2) case
             (1) base case : 재귀 호출 없이 답 추출 가능한 경우
+                - base case에 대한 정의가 중요하다
+                - 항상 base case로 도달해야함(무한 루프에 빠지면 안된다)
             (2) recursive case : 재귀 호출을 써야 답 추출 가능한 경우
         3) 예시
             (1) factorial
@@ -324,8 +326,136 @@
                         high-(mid+1)+1 = high-(low+high)/2 <= (high-low+1)/2
         4) 종류
             (1) linear recursion
+                1] case
+                    [1] base case : 재귀 호출 없이 답 추출 가능한 경우
+                        - base case에 대한 정의가 중요하다
+                        - 항상 base case로 도달해야함(무한 루프에 빠지면 안된다)
+                    [2] recursive case : 재귀 호출을 써야 답 추출 가능한 경우
+                        - 항상 base case로 도달해야함(무한 루프에 빠지면 안된다)
+                        - 재귀적 호출 중 어떤 호출이 필요한지 테스트 할 수 있지만, 궁극적으로 하나의 재귀 호출만 수행해야함
+                2] 예시
+                    [1] linear sum
+                        1]] 알고리즘
+                            Algorithm LinearSum(A, n):
+                                # A : 배열
+                                # n : 원소 개수
+                                # output : 배열에서 n번째 원소까지의 합
+                                if n = 1 then
+                                    return A[0]
+                                else
+                                    return LinearSum(A, n-1) + A[n-1]
+                                    
+                            -> for문으로 짜도 된다
+                    [2] reverse array
+                        1]] 알고리즘
+                            Algorithm ReverseArray(A, i, j):
+                                # A : 배열
+                                # i : 앞쪽에서 오는 원소 인덱스
+                                # j : 뒤쪽에서 오는 원소 인덱스
+                                # output : 배열 앞 뒤 원소 reverse
+                                if i < j then
+                                    swap A[i] and A[j]
+                                    ReverseArray(A, i+1, j-1)
+                                return
+
+                            -> for문으로 짜도 된다
+                        2]] 코드 구현
+                            def reverse(S, start, stop):
+                                if start < stop-1: # 배열 인덱스가 0부터 시작하기 때문에 stop-1이 마지막 원소 인덱스
+                                    S[start], S[stop-1] = S[stop-1], S[start]
+                                    reverse(S, start+1, stop-1)
+
+                            -> for문으로 짜도 된다
+                    [3] power
+                        1]] 알고리즘1
+                            P(x, n) = x^n
+
+                            P(x, n) = 1                 (if n = 0)
+                            P(x, n) = x * p(x, n-1)     (else)
+
+                            -> O(n)
+                            -> for문으로 짜도 된다
+                        2]] 알고리즘2
+                            P(x, n) = 1                     (if x = 0)
+                            P(x, n) = x * P(x, (n-1)/2)^2   (if x > 0 is odd)
+                            P(x, n) = p(x, n/2)^2           (if x > 0 is even)
+
+                            Algorithm Power(x, n):
+                                # x : 밑
+                                # n : 지수
+                                # output : x^n
+                                if n = 0 then
+                                    return 1
+                                if n is odd then
+                                    y = power(x, (n-1)/2)   # O(logn)
+                                    return x * y * y
+                                else
+                                    y = power(x, n/2)       # O(logn)
+                                    return y * y
+
+                            -> O(logn)
+                            -> for문으로 짜도 된다
             (2) tail recursion
+                1] 개념 : last step에서 recursive call 발생
+                2] 예시 알고리즘
+                    Algorithm IterativeReverseArray(A, i, j):
+                        # A : 배열
+                        # i : 앞쪽에서 오는 원소 인덱스
+                        # j : 뒤쪽에서 오는 원소 인덱스
+                        # output : 배열 앞뒤 원소 reverse
+                        while i < j do
+                            Swap A[i] and A[j]
+                            i = i + 1
+                            j = j - 1
+                        return IterativeReverseArray(A, i, j) # 바로 점프해서 속도 빠를 수 있다.
             (3) binary recursion
+                1] 개념 : 각각의 non base case에서 2개 recursive call 발생
+                2] 예시 알고리즘
+                    [1] english ruler
+                        drawTicks(length)
+                            if(length > 0) then
+                                drawTicks(length - 1)
+                                주어진 길이의 tick을 draw
+                                drawTicks(length - 1)
+                    [2] binary sum
+                        Algorithm BinarySum(A, i, n):
+                            # A : 배열
+                            # i : 배열에서 원소 인덱스
+                            # n : 분할되고 남은 원소 개수
+                            # output : 배열에서 n번째 원소까지의 합
+                            if n = 1 then
+                                return A[i]
+                            return BinarySum(A, i, n/2) + BinarySum(A, i + n/2, n/2)
+                    [3] fibonacci numbers 비효율적 방법
+                        F_0 = 0
+                        F_1 = 1
+                        F_i = F_(i-1) + F_(i-2)         (if i > 1)
+
+                        Algorithm BinaryFib(k):
+                            # k : 피보나치 계산 횟수
+                            # output : 피보나치 수 = F_k
+                            if k = 1 then
+                                return k
+                            else
+                                return BinaryFib(k-1) + BinaryFib(k-2)
+
+                        -> recursion 횟수 : n_k > 2^(k/2)
+                    [4] fibonacci numbers 효율적 방법
+                        Algorithm LinearFib(k):
+                            # k : 피보나치 계산 횟수
+                            # output : 피보나치 수 쌍 = F_k, F_(k-1)
+                            if k = 1 then
+                                return (k, 0)
+                            else
+                                (i, j) = LinearFib(k-1)
+                                return (i+j, i)
+
+                        -> recursion 횟수 : n_k = k-1
             (4) multiple recursion
-                    
+                1] 개념 : 많은 recursive call 발생(1 or 2번이 아님)
+                2] 예시
+                    [1] summation puzzles
+                        pot + pan = bib     // 421 + 437 = 858 (p=4, o=2, t=1, a=3, n=7, b=8, i=5)
+                        dog + cat = pig
+                        boy + girl = baby
 """

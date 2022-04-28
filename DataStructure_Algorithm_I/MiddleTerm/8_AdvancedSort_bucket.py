@@ -26,9 +26,48 @@ def bucket_sort(arr):
     # bucket list별로 정렬 + 결과 합치기
     final_list = []
     for k in range(len(buckets_list)):
-        quick_sort(buckets_list[k])
+        DualPivotQuick_sort(buckets_list[k],0,len(buckets_list[k])-1)
         final_list = final_list + buckets_list[k]
     return final_list
+
+def DualPivotQuick_sort(arr, low, high):
+    if low < high:
+        lp, rp = partition(arr, low, high)
+
+        DualPivotQuick_sort(arr, low, lp - 1)
+        DualPivotQuick_sort(arr, lp + 1, rp - 1)
+        DualPivotQuick_sort(arr, rp + 1, high)
+
+def partition(arr, low, high):
+    if arr[low] > arr[high]:
+        arr[low], arr[high] = arr[high], arr[low]
+
+    j = k = low + 1
+    g, p, q = high - 1, arr[low], arr[high]
+
+    while k <= g:
+        if arr[k] < p:
+            arr[k], arr[j] = arr[j], arr[k]
+            j += 1
+
+        elif arr[k] >= q:
+            while arr[g] > q and k < g:
+                g -= 1
+
+            arr[k], arr[g] = arr[g], arr[k]
+            g -= 1
+
+            if arr[k] < p:
+                arr[k], arr[j] = arr[j], arr[k]
+                j += 1
+        k += 1
+    j -= 1
+    g += 1
+
+    arr[low], arr[j] = arr[j], arr[low]
+    arr[high], arr[g] = arr[g], arr[high]
+
+    return j, g
 
 def bubble_sort(arr):
     for i in range(len(arr)):

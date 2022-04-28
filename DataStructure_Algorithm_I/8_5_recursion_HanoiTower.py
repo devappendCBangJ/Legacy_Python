@@ -44,11 +44,16 @@ HanoiStackA = HanoiStack(SIZE, stackA, top)
 HanoiStackB = HanoiStack(SIZE, stackB, top)
 HanoiStackC = HanoiStack(SIZE, stackC, top)
 
-def Hanoi():
-	pop_data = HanoiStackA.pop()
-	HanoiStackB.push(pop_data)
+def hanoi(_num, _from, _to, _other):
+	if _num == 0:
+		return
+	hanoi(_num-1, _from, _other, _to)
+	_to.push(_from.pop())
+	hanoi(_num-1, _other, _to, _from)
+
+print(2**SIZE - 1, "회 움직임")
+hanoi(SIZE, HanoiStackA, HanoiStackC, HanoiStackB)
 
 print(HanoiStackA.stack)
-print("return data : ", HanoiStackA.pop())
-print(HanoiStackA.stack)
 print(HanoiStackB.stack)
+print(HanoiStackC.stack)

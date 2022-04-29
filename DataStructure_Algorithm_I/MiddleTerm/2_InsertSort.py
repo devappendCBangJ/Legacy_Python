@@ -1,5 +1,3 @@
-# https://www.daleseo.com/sort-insertion/
-
 import time
 
 # 삽입 정렬
@@ -7,20 +5,10 @@ def insertion_sort(arr):
     for i in range(1, len(arr)):
         j = i
         while (0 < j) and (arr[j] < arr[j - 1]):
-            arr[j - 1], arr[j] = arr[j], arr[j - 1]
+            temp = arr[j-1]
+            arr[j-1] = arr[j]
+            arr[j] = temp
             j = j - 1
-
-# 삽입 정렬
-# def insertSort(arr):
-#     for i in range(1, len(arr)):
-#         temp = arr[i]
-#         for j in range(i-1, 0, -1):
-#             if arr[j] > temp:
-#                 arr[j+1] = arr[j]
-#             else:
-#                 arr[j+1] = temp
-#                 break
-#         arr[0] = temp
 
  # Average Filter : 실행 시간 계속 달라지므로 여러번 반복하여 평균 취함
 tot_time = 0

@@ -1,7 +1,3 @@
-# https://stackabuse.com/bucket-sort-in-python/
-
-import time
-
 import time
 
 def bucket_sort(arr):
@@ -26,60 +22,36 @@ def bucket_sort(arr):
     # bucket list별로 정렬 + 결과 합치기
     final_list = []
     for k in range(len(buckets_list)):
-        buckets_list[k] = tim_sort(buckets_list[k])
+        quick_sort(buckets_list[k])
         final_list = final_list + buckets_list[k]
     return final_list
 
-def insertion_sort(arr):
-    for i in range(1, len(arr)):
-        for j in range(i, 0, -1):
-            if (arr[j] < arr[i - 1]):
-                t = arr[j]
-                arr[j] = arr[j - 1]
-                arr[j - 1] = t
+def quick_sort(arr):
+    def sort(low, high):
+        if(low < high): # low와 high가 같아지는 경우 : 배열에 원소가 1개만 있을때 ♣
+            # pivot보다 작은 숫자 구역, pivot보다 큰 숫자 구역별 원소 분류. reculsive하게 반복(pivot 자체는 sorting에 참여 x)
+            pivot_idx = partition(low, high)
+
+            # 배열 2등분 reculsive하게 반복
+            sort(low, pivot_idx - 1)
+            sort(pivot_idx + 1, high)
+
+    def partition(low, high):
+        pivot = arr[low] # pivot 선택
+        m = low # S1, S2가 비워진 상태에서 시작
+
+        for k in range(low + 1, high + 1): # pivot보다 큰 인덱스부터 시작해서, 마지막 인덱스까지 순회 ♣
+            if(arr[k] < pivot): # case2(pivot보다 더 작은 원소인 경우) : swap o, case1(pivot보다 더 큰 원소인 경우) : swap x
+                m += 1
+                arr[k], arr[m] = arr[m], arr[k]
             else:
-                break
-            i = i - 1
-    return arr
+                pass
+        arr[low], arr[m] = arr[m], arr[low] # pivot 위치로 swap o
+        return m
 
-def merge(arr1, arr2):
-    a = 0
-    b = 0
-    temp = []
-
-    while(a < len(arr1) and b < len(arr2)):
-        if(arr1[a] < arr2[b]):
-            temp.append(arr1[a])
-            a = a + 1
-        elif(arr1[a] > arr2[b]):
-            temp.append(arr2[b])
-            b = b + 1
-        else:
-            temp.append(arr1[a])
-            temp.append(arr2[b])
-            a = a + 1
-            b = b + 1
-    while(a < len(arr1)):
-        temp.append(arr1[a])
-        a = a + 1
-    while(b < len(arr2)):
-        temp.append(arr2[b])
-        b = b + 1
-
-    return temp
-
-def tim_sort(arr):
-    for x in range(0, len(arr), run):
-        arr[x : x + run] = insertion_sort(arr[x : x + run])
-    runinc = run
-    while(runinc < len(arr)):
-        for x in range(0, len(arr), 2 * runinc):
-            arr[x : x + 2 * runinc] = merge(arr[x : x + runinc], arr[x + runinc : x + 2 * runinc])
-        runinc = runinc * 2
-    return arr
+    return sort(0, len(arr) - 1)
 
  # Average Filter : 실행 시간 계속 달라지므로 여러번 반복하여 평균 취함
-run = 5
 tot_time = 0
 repeat = 500
 for i in range(repeat):

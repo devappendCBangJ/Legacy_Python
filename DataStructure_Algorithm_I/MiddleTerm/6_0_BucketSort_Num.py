@@ -1,5 +1,3 @@
-# https://stackabuse.com/bucket-sort-in-python/
-
 import time
 
 def bucket_sort(input_list):

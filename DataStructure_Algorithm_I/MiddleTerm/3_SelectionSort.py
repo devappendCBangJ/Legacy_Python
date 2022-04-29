@@ -1,5 +1,3 @@
-# https://www.daleseo.com/sort-selection/
-
 import time
 
 # 선택 정렬
@@ -9,7 +7,9 @@ def selection_sort(arr):
         for j in range(i + 1, len(arr)):
             if arr[j] < arr[min_idx]:
                 min_idx = j
-        arr[i], arr[min_idx] = arr[min_idx], arr[i]
+        temp = arr[i]
+        arr[i] = arr[min_idx]
+        arr[min_idx] = temp
 
  # Average Filter : 실행 시간 계속 달라지므로 여러번 반복하여 평균 취함
 tot_time = 0

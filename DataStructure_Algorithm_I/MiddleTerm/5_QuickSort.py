@@ -1,5 +1,3 @@
-# https://www.daleseo.com/sort-quick/
-
 import time
 
 def quick_sort(arr):

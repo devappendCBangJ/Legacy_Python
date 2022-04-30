@@ -252,7 +252,7 @@
 
             Radix Sort : O(dn) / O(dn) / no / yes
 
-    1. Recursion
+    ● Recursion
         1) 개념 : method가 자기 자신을 call
         2) case
             (1) base case : 재귀 호출 없이 답 추출 가능한 경우
@@ -458,4 +458,76 @@
                         pot + pan = bib     // 421 + 437 = 858 (p=4, o=2, t=1, a=3, n=7, b=8, i=5)
                         dog + cat = pig
                         boy + girl = baby
+
+    ● Hash Tables
+        1. Map
+            1) 특징
+                (1) 검색가능한 key-value pairs items의 집단
+                (2) 활용 : searching, inserting, deleting 등
+                (3) 같은 key의 여러 item 허용x
+            2) 예시
+                (1) address book
+                (2) student-record database
+                (3) python의 dict class
+            3) ADT
+                M[k] : map M에서 key k와 관련된 value v return
+                M[k] = v : map M에서 key k와 관련된 value v를 replacing
+                del M[k] : map M에서 key k와 관련된 item remove
+                len(M) : map M에서 item의 개수
+                iter(M) : map M에서 key 순서대로 순회
+                k in M : map M에 key k 존재 시, true return
+                M.get(k, d=None) : map M에 key k 존재 시, value v return / 그렇지 않은 경우, value d return
+                M.setdefault(k, d) : map M에 key k 존재 시, value v return / 그렇지 않은 경우, M[k] = d 대입 + value d return
+                M.pop(k, d = None) : map M에서 key k와 관련된 item remove + value v return / 그렇지 않은 경우, value d return
+            4) 구현
+                (1) Simple List-Based Map
+                    1] 특징
+                        [1] 구현 : unsorted list로 구현
+                        [2] 유용한 경우
+                            - 작은 size의 map
+                            - insertion 자주 발생하는 map
+                            - searching, removing 거의 발생하지 않는 map
+                    2] 시간복잡도
+                        [1] inserting : O(1)
+                            - insertion 시 중복 key값 체크하지 않는 경우만 O(1)
+                            - insertion 시 중복 key값 체크 시 시간복잡도 증가
+                        [2] searching : O(n)
+                        [3] removing : O(n)
+                (2) Hash Tables
+                    1] hash function(h)
+                        [1] 목적 : key를 넓게 분포시켜서 중복 방지(index 관리)
+                        [2] 구조
+                            h(x) = h2(h1(x))
+                            1]] hash code
+                                [[1]] 개념
+                                    h1 : keys -> integers
+                                [[2]] 활용 예시
+                                    - Memory Address : 메모리 주소 활용
+                                    - Integer Cast : key의 bit 활용
+                                    - Component Sum : key의 bit 조각을 더함       (overflow 무시)
+                                    - Polynomial accumulation : p(z) = a0 + a_1 * z_1 + a_2 * z_2 + ... + a_(n-1) * z_(n-1)     (overflow 무시)
+                                        z : fixed value
+                            2]] compression func
+                                [[1]] 개념
+                                    h2 : integers -> [0, N-1]
+                                [[2]] 활용 예시
+                                    - Division : h2(y) = y mod N
+                                        N : 충돌 가능성 낮추기 위해 '소수' 사용 ♣
+                                    - Multiply & Add & Divide : h2(y) = (ay + b) mod N
+                                        a, b : 음이 아닌 정수 ♣
+                            3]] Collision Handling
+                        [3] 예시
+                            1]] SSN
+                                배열 크기 N = 10,000
+                                h(x) = x의 마지막 4자리 수
+                        [4] 성능
+                            - collision의 개수와 높은 연관성
+                            - 적절한 수치 선택 by 목적
+                            1]] collision감소, address space증가
+                                ex. data개수 << N개수
+                            2]] collision증가, address space감소
+                                ex. data개수 = N개수
+                        [5] 구현
+                            강의자료 참조
+
 """

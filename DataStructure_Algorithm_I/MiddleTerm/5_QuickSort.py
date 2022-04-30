@@ -6,7 +6,7 @@ def quick_sort(arr):
             return
         mid = partition(low, high)
         # pivot 기준 배열 2등분
-        sort(low, mid - 2) #
+        sort(low, mid - 2)
         sort(mid, high)
 
     def partition(low, high):

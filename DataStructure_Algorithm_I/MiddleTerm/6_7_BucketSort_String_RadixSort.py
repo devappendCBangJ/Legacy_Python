@@ -22,11 +22,12 @@ def bucket_sort(arr):
     # bucket list별로 정렬 + 결과 합치기
     final_list = []
     for k in range(len(buckets_list)):
-        radix_sort(buckets_list[k])
-        final_list = final_list + buckets_list[k]
+        if (len(buckets_list[k]) != 0):
+            buckets_list[k] = radix_sort(buckets_list[k])
+            final_list = final_list + buckets_list[k]
     return final_list
 
-def count_sort(array, size, col, base, max_len):
+def sort(array, size, col, base):
     # output : sorting된 원소 담는 배열
     output = [0] * size
     # count : 문자 개수 배열
@@ -44,23 +45,20 @@ def count_sort(array, size, col, base, max_len):
 
     # B : sorting된 원소 담음. C가 B의 인덱스를 알려줌
     for item in reversed(array):
-        # Get index of current letter of item at index col in count array
         letter = ord(item[col]) - min_base if col < len(item) else 0 # 현재 원소 길이 > 확인하고 싶은 문자열 인덱스 : 숫자 개수 count++, 현재 원소 길이 < 확인하고 싶은 문자열 인덱스 : 숫자 개수 0
         output[count[letter] - 1] = item # output 배열의 인덱스 0번부터 값을 넣기 위해. 인덱스 뒤쪽부터 정렬해서 현재 자리수에서 같은 수를 가질때, 이전 자리수가 더 큰 자료를 더 높은 인덱스에 둘 수 있게 만듦
         count[letter] -= 1 # 인덱스 뒤쪽부터 정렬해서 현재 자리수에서 같은 수를 가질때, 이전 자리수가 더 큰 자료를 더 높은 인덱스에 둘 수 있게 만듦
 
     return output
 
-def radix_sort(array, max_col = None):
-    """ Main sorting routine """
+def radix_sort(array, max_count = None):
     # 길이가 가장 긴 문자열 반환
-    if (len(array) != 0):
-        if not max_col: # not None = True, None = False
-            max_col = len(max(array, key = len)) # max(array, key = len) : string의 관점에서 배열에서 최대값을 갖는 원소 추출
+    if not max_count:
+        max_count = len(max(array, key = len)) # max(array, key = len) : string의 관점에서 배열에서 최대값을 갖는 원소 추출
 
-        # 각 원소의 마지막 문자 -> 각 원소의 처음 문자 순으로 비교 + 정렬
-        for col in range(max_col-1, -1, -1): # max_len-1, max_len-2, ...0
-            array = count_sort(array, len(array), col, 67, max_col) # 67 : 아스키코드 A~z까지 문자 개수
+    # 각 원소의 마지막 문자 -> 각 원소의 처음 문자 순으로 비교 + 정렬
+    for cnt in range(max_count-1, -1, -1): # max_len-1, max_len-2, ...0
+        array = sort(array, len(array), cnt, 67) # 67 : 아스키코드 A~z까지 문자 개수
     return array
 
  # Average Filter : 실행 시간 계속 달라지므로 여러번 반복하여 평균 취함

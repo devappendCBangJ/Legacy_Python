@@ -515,7 +515,6 @@
                                         N : 충돌 가능성 낮추기 위해 '소수' 사용 ♣
                                     - Multiply & Add & Divide : h2(y) = (ay + b) mod N
                                         a, b : 음이 아닌 정수 ♣
-                            3]] Collision Handling
                         [3] 예시
                             1]] SSN
                                 배열 크기 N = 10,000
@@ -527,7 +526,108 @@
                                 ex. data개수 << N개수
                             2]] collision증가, address space감소
                                 ex. data개수 = N개수
-                        [5] 구현
+                        [5] 실제 구현
                             강의자료 참조
+                    2] Collision Handling
+                        [1] 개념 : 서로 다른 원소가 같은 cell에 map되었을 때 대처
+                        [2] 종류
+                            1]] Separate Chaining
+                                [[1]] 개념 : 충돌 item을 linked list로 연결
+                                [[2]] 특징
+                                    - 간단한 구현
+                                    - 추가 메모리 필요
+                                [[3]] 알고리즘
+                                    Algorithm get(k)
+                                        return A[h(k)].get(k)
+                                    Algorithm put(k, n)
+                                        t = A[h(k)].put(k, n)
+                                        if t = null then        (k is a new key) ♣
+                                            n = n + 1
+                                        return t
+                                    Algorithm remove(k)
+                                        t = A[h(k)].remove(k)   (k was found) ♣
+                                        if t != null then
+                                            n = n - 1
+                                        return t
+                                [[4]] 실제 구현
+                                    강의자료 참조
+                            2]] Open Addressing - Linear Probing
+                                [[1]] 개념 : 충돌 item을 다음 남은 table cell에 넣음
+                                [[2]] 예시
+                                    h(x) = x mod 13
+                                    insert key : 18, 41, 22, 44, 59, 32, 31, 73
+
+                                    18 -> 5
+                                    41 -> 2
+                                    22 -> 9
+                                    44 -> 5 -> 6
+                                    59 -> 7
+                                    32 -> 6 -> 7 -> 8
+                                    31 -> 5 -> 6 -> 7 -> 8 -> 9 -> 10
+                                    73 -> 8 -> 9 -> 10 -> 11
+                                [[3]] 알고리즘
+                                    - Searching
+                                        Algorithm get(k)
+                                            i <- h(k)
+                                            p <- 0
+                                            repeat
+                                                c <- A[i]
+                                                if c = null                 // 해당 item 존재x 시, null 반환
+                                                    return null
+                                                else if c.getKey() = k      // 해당 item 존재o + key 일치o 시, value 반환
+                                                    return c.getValue()
+                                                else                        // 해당 item 존재o + key 일치x 시, i와 p 증가시키면서 반복
+                                                    i <- (i + 1) mod N
+                                                    p <- p + 1
+                                            until p = N                     // p 개수가 배열 개수와 같아질때까지 반복
+                                            return null
+                                    - updating
+                                        key k 탐색
+                                            (k, o) 발견 시, 삭제하지 않음. special item인 available로 바꿈
+                                                이렇게 해서 나중에 Searching 할 때, An empty cell is found가 되지 않도록 함
+                                                + 나중에 Inserting 할 때, available에도 data 넣을 수 있도록 함
+                                    - put(k, o)
+
+                                        Algorithm put(k, o)
+                                [[4]] 실제 구현
+                                    강의자료 참조
+                            3]] Open Addressing - Double Hashing(Double Probing)
+                                [[1]] 개념 : 2개 hash func 사용 + 충돌 item을 다음 남은 table cell에 넣음
+                                    - h(k) = k mod N
+                                    - d(k) = (q - k) mod q
+                                    - (i + jd(k)) mod N     // d(k) >= 0
+                                [[2]] 특징
+                                    - 시간 복잡도
+                                        Searching, Inserting, Removing on Hash table
+                                        최악 : O(n)
+                                        대부분 : O(1)
+                                [[3]] 비교
+                                    - linear probing : 한 뭉탱이로 data 몰려있으면 probing 연산 증가
+                                    - double probing : 한 뭉탱이로 data 몰려있어도 점프해서 data 넣기 때문에 probing 연산 감소
+                                [[4]] 예시 ♣
+                                    - Small Database
+                                    - Compilers
+                                    - Browser Caches
+                                [[4]] 예시
+                                    N = 13
+                                    h(k) = k mod 13         // i mod N
+                                    d(k) = 7 - k mod 7      // (i + jd(k)) mod N
+    ● Skip List
+        1) 특징
+            (1) special key인 -∞ ~ +∞ 포함
+            (2) key는 오름차순
+            (3) S_h ⊂ ... S_1 ⊂ S_0
+        2) 알고리즘
+            (1) Searching
+                1] top list의 첫번째 위치 p부터 탐색
+                2] 현재 위치 p에서 x <-> y = key(next(p)) 비교
+                    [1] x = y : return element(next(p))
+                    [2] x > y : scan forward
+                    [3] x < y : drop down
+            (2) Insertion
+                1] 
+            (3) Deletion
+                1]
+        3) 시간복잡도 : O(nlogn)
 
 """

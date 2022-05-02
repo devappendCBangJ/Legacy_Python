@@ -36,11 +36,11 @@ class HanoiStack:
 
 SIZE = 5
 stackA = ['1', '2', '3', '4', '5']
-stackB = []
-stackC = []
-top = 0
+stackB = [None, None, None, None, None]
+stackC = [None, None, None, None, None]
+top = -1
 
-HanoiStackA = HanoiStack(SIZE, stackA, top)
+HanoiStackA = HanoiStack(SIZE, stackA, 4)
 HanoiStackB = HanoiStack(SIZE, stackB, top)
 HanoiStackC = HanoiStack(SIZE, stackC, top)
 
@@ -49,11 +49,11 @@ def hanoi(_num, _from, _to, _other):
 		return
 	hanoi(_num-1, _from, _other, _to)
 	_to.push(_from.pop())
+	print(HanoiStackA.stack)
+	print(HanoiStackB.stack)
+	print(HanoiStackC.stack)
+	print('ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ')
 	hanoi(_num-1, _other, _to, _from)
 
 print(2**SIZE - 1, "회 움직임")
 hanoi(SIZE, HanoiStackA, HanoiStackC, HanoiStackB)
-
-print(HanoiStackA.stack)
-print(HanoiStackB.stack)
-print(HanoiStackC.stack)

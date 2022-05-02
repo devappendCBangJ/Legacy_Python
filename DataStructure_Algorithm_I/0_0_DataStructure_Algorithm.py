@@ -520,4 +520,76 @@
                         - root node = 1
                         - parent node의 왼쪽 자식 = parent node x 2
                         - parent node의 오른쪽 자식 = parent node x 2 + 1
+
+    ● Priority Queues
+        1) The Priority Queue ADT
+            (1) 특징
+                - (key, value)쌍 item 저장
+            (2) Queue ADT
+                1] Main Priority Queue Operations
+                    add(k, x) : key k, value x인 item 삽입
+                    remove_min() : key가 가장 작은 item 삭제
+                2] Auxiliary Priority Queue Operations
+                    min() : 최소값인 key return
+                    len(P)
+                    is_empty()
+                3] Applications
+                    [1] Standby flyers
+                    [2] Auctions
+                    [3] Stock market
+            (3) 예시
+                강의자료 참조
+            (4) 연산
+                1] unsorted array : dequeue 시 sort
+                    - enqueue() : O(1)
+                    - dequeue() : O(n)
+                1] sorted array : enqueue 시 sort
+                    - enqueue() : O(n)
+                    - dequeue() : O(1)
+                2] unsorted linked list : dequeue 시 sort
+                    - enqueue() : O(1)
+                    - dequeue() : O(n)
+                2] sorted linked list : enqueue 시 sort
+                    - enqueue() : O(n)
+                    - dequeue() : O(1)
+                3] heap
+                    - enqueue() : O(logn)
+                    - dequeue() : O(logn)
+
+                    - n이 커질수록 진가 발휘
+                    - 동일한 성능 보장 in 실시간 작업
+
+                1] unsorted array
+                    add : O(1)
+                    remove_min = min : O(n)
+                1] sorted array
+                    add : O(n)
+                    remove_min = min : O(1)
+            (5) 예시
+                1] PQ(Priority Queue) Sort
+                    [1] 알고리즘
+                        1]] add
+                        2]] remove_min
+
+                        Algorithm PQSort(S, C)
+                            input : sequence S, S의 원소에 대한 Comparator C
+                            output : C에 따라 증가하는 순서로 정렬된 sequence S
+                            while ~S.is_empty()
+                                e <- S.remove_first()
+                                P.add(e, null)
+                            while ~P.is_empty()
+                                e <- P.removeMin().key()
+                                S.add_last(e)
+                    [2] 종류
+                        1]] Selection Sort in PQ : dequeue할 때 sort
+                            - insert : O(n)
+                            - remove_min : n(n+1)/2 = O(n^2)
+                        2]] Insertion Sort in PQ : enqueue할 때 sort
+                            - insert : n(n+1)/2 = O(n^2)
+                            - remove_min : O(n)
+                        3]] In-place Insertion Sort in PQ : 추가 메모리 사용x. swap
+                    
+                
+                    
+
 """

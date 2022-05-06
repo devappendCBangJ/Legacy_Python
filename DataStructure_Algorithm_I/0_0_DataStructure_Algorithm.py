@@ -522,54 +522,63 @@
                         - parent node의 오른쪽 자식 = parent node x 2 + 1
 
     ● Priority Queues
-        1) The Priority Queue ADT
+        1) 개요
             (1) 특징
-                - (key, value)쌍 item 저장
-            (2) Queue ADT
-                1] Main Priority Queue Operations
-                    add(k, x) : key k, value x인 item 삽입
-                    remove_min() : key가 가장 작은 item 삭제
-                2] Auxiliary Priority Queue Operations
-                    min() : 최소값인 key return
-                    len(P)
-                    is_empty()
-                3] Applications
-                    [1] Standby flyers
-                    [2] Auctions
-                    [3] Stock market
-            (3) 예시
-                강의자료 참조
-            (4) 연산
-                1] unsorted array : dequeue 시 sort
-                    - enqueue() : O(1)
-                    - dequeue() : O(n)
-                1] sorted array : enqueue 시 sort
-                    - enqueue() : O(n)
-                    - dequeue() : O(1)
-                2] unsorted linked list : dequeue 시 sort
-                    - enqueue() : O(1)
-                    - dequeue() : O(n)
-                2] sorted linked list : enqueue 시 sort
-                    - enqueue() : O(n)
-                    - dequeue() : O(1)
-                3] heap
-                    - enqueue() : O(logn)
-                    - dequeue() : O(logn)
+                1] (key, value)쌍 item 저장
+                2] key만 순서에 영향
+        2) The Priority Queue ADT
+            1] Main Priority Queue Operations
+                add(k, x) : key k, value x인 item 삽입
+                remove_min() : key가 가장 작은 item 삭제
+            2] Auxiliary Priority Queue Operations
+                min() : 최소값인 key return
+                len(P)
+                is_empty()
+            3] Applications
+                [1] Standby flyers
+                [2] Auctions
+                [3] Stock market
+        3) 예시
+            - 강의자료 참조
+        4) 연산
+            1] unsorted array : dequeue 시 sort
+                - enqueue() : O(1)
+                - dequeue() : O(n)
+            1] sorted array : enqueue 시 sort
+                - enqueue() : O(n)
+                - dequeue() : O(1)
+            2] unsorted linked list : dequeue 시 sort
+                - enqueue() : O(1)
+                - dequeue() : O(n)
+            2] sorted linked list : enqueue 시 sort
+                - enqueue() : O(n)
+                - dequeue() : O(1)
+            3] heap
+                - enqueue() : O(logn)
+                - dequeue() : O(logn)
 
-                    - n이 커질수록 진가 발휘
-                    - 동일한 성능 보장 in 실시간 작업
+                - n이 커질수록 진가 발휘
+                - 동일한 성능 보장 in 실시간 작업
 
-                1] unsorted array
-                    add : O(1)
-                    remove_min = min : O(n)
-                1] sorted array
-                    add : O(n)
-                    remove_min = min : O(1)
-            (5) 예시
-                1] PQ(Priority Queue) Sort
-                    [1] 알고리즘
-                        1]] add
-                        2]] remove_min
+            1] unsorted array
+                add : O(1)
+                remove_min = min : O(n)
+            1] sorted array
+                add : O(n)
+                remove_min = min : O(1)
+        5) 활용
+            1] PQ(Priority Queue) Sort
+                [1] 알고리즘
+                    1]] add
+                    2]] remove_min
+                [2] 종류
+                    1]] Selection Sort in PQ : dequeue할 때 sort
+                        - insert : O(n)
+                        - remove_min : n(n+1)/2 = O(n^2)
+
+                    2]] Insertion Sort in PQ : enqueue할 때 sort
+                        - insert : n(n+1)/2 = O(n^2)
+                        - remove_min : O(n)
 
                         Algorithm PQSort(S, C)
                             input : sequence S, S의 원소에 대한 Comparator C
@@ -580,16 +589,72 @@
                             while ~P.is_empty()
                                 e <- P.removeMin().key()
                                 S.add_last(e)
-                    [2] 종류
-                        1]] Selection Sort in PQ : dequeue할 때 sort
-                            - insert : O(n)
-                            - remove_min : n(n+1)/2 = O(n^2)
-                        2]] Insertion Sort in PQ : enqueue할 때 sort
-                            - insert : n(n+1)/2 = O(n^2)
-                            - remove_min : O(n)
-                        3]] In-place Insertion Sort in PQ : 추가 메모리 사용x. swap
-                    
-                
-                    
+                    3]] In-place Insertion Sort in PQ : 추가 메모리 사용x. swap
+            2] Heap
+                [1] 개념 : Complete binary tree 이용한 Priority Queue 구현
+                [2] 특징
+                    1]] Complete binary tree : 마지막 level에서 조금 비어있는 tree
+                    2]] Heap order : root가 아닌 모든 internal node의 부자 관계는 key(v) >= key(parent(v))
+                    3]] last node : 최대 depth의 최우측 node
+                    4]] Heap의 height : O(logn)
+                        key : 2^i개 (i = 0, 1, ..., h-1 depth)
+                              적어도 1개 (i = h depth)
+                        2^h <= n
+                        h <= logn
+                [3] 알고리즘
+                    1]] insertion
+                        -> insertion node인 z 탐색
+                        -> z에 k 저장
+                        -> heap order property 복원 by upheap
+
+                        - upheap
+                            목적 : heap order property(internal node의 부자 관계 : key(v) >= key(parent(v))를 지키기 위함
+                            시간복잡도 : O(logn)
+                    2]] removal
+                        -> root key와 last node w의 key를 swap
+                        -> w 제거
+                        -> heap order property 복원 by downheap
+
+                        - down heap
+                            목적 : heap order property(internal node의 부자 관계 : key(v) >= key(parent(v))를 지키기 위함
+                            시간복잡도 : O(logn)
+                    3]] update last node
+                        -> 왼쪽에 부모 있으면 따라감. 왼쪽에 부모가 없을 때까지 따라감
+                        -> 오른쪽 부모 따라감. 오른쪽 부모가 없을 때까지 따라감
+                        -> 왼쪽 자식을 따라감. 왼쪽 자식이 없을 때까지 따라감
+
+                        [[1]] 자료저장 시간복잡도 : O(logn) = logn + logn ♣
+                        [[2]] 전체수행 시간복잡도 : O(n) ♣
+                    4]] heap sort
+                        시간복잡도
+                            space : O(n)
+                            add : O(logn)
+                            len, is_empty, min : O(1)
+                            sort : O(nlogn)
+                    5]] merge two heaps
+                        -> 2개 heap, 1개 key k 존재
+                        -> root node에 k 넣고 2개 heap을 subtree로 해서 합쳐
+                        -> heap order property 복원 by downheap
+
+                        - bottom up heap construction
+                            목적 : 2개 heap을 merge하기 위함
+                            시간복잡도 : O(logn)
+                                2^i - 1 keys를 가진 heap 2개를 2^(i+1) - 1의 keys를 가진 heap 1개로 병합
+                [4] 종류
+                    1]] 배열 기반 heap
+                        [[1]] 개념 : 배열을 이용 heap 구현
+                        [[2]] 특징
+                            - 인덱스
+                                node number
+                                    왼쪽 자식 : 2i + 1
+                                    오른쪽 자식 : 2i + 2
+                                add
+                                    n + 1 인덱스에 원소 저장
+                                remove_min
+                                    n 인덱스의 원소 삭제
+                            - 성능 좋음
+                [5] 예시
+                    - 강의자료 참조
+
 
 """

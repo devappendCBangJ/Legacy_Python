@@ -566,7 +566,7 @@
                                     31 -> 5 -> 6 -> 7 -> 8 -> 9 -> 10
                                     73 -> 8 -> 9 -> 10 -> 11
                                 [[3]] 알고리즘
-                                    - Searching
+                                    1]]] Searching
                                         Algorithm get(k)
                                             i <- h(k)
                                             p <- 0
@@ -581,12 +581,12 @@
                                                     p <- p + 1
                                             until p = N                     // p 개수가 배열 개수와 같아질때까지 반복
                                             return null
-                                    - updating
+                                    2]]] updating
                                         key k 탐색
                                             (k, o) 발견 시, 삭제하지 않음. special item인 available로 바꿈
                                                 이렇게 해서 나중에 Searching 할 때, An empty cell is found가 되지 않도록 함
                                                 + 나중에 Inserting 할 때, available에도 data 넣을 수 있도록 함
-                                    - put(k, o)
+                                    3]]] put(k, o)
 
                                         Algorithm put(k, o)
                                 [[4]] 실제 구현
@@ -612,6 +612,7 @@
                                     N = 13
                                     h(k) = k mod 13         // i mod N
                                     d(k) = 7 - k mod 7      // (i + jd(k)) mod N
+
     ● Skip List
         1) 특징
             (1) special key인 -∞ ~ +∞ 포함
@@ -629,5 +630,91 @@
             (3) Deletion
                 1]
         3) 시간복잡도 : O(nlogn)
+
+    ● Search Trees
+        1. Binary search trees
+            1) 개요
+                (1) ordered maps
+                    1] 개념 : key 기준으로 sorting된 map
+                    2] 특징
+                        [1] 원하는 key인 k에 가장 가까운 기존 item 내의 key 추출 가능
+                            - k보다 작거나 같은 가장 큰 key인 item
+                            - k보다 크거나 같은 가장 작은 key인 item
+                (2) binary search
+                    1] 개념 : 배열로 구현된 ordered maps(key 기준 sorting된 map)에서 search
+                    2] 특징
+                        [1] 시간복잡도 : O(logn)
+                (3) search tables
+                    1] 개념 : 배열로 구현된 ordered maps(key 기준 sorting된 map)에서 search
+                    2] 특징
+                        [1] 시간복잡도
+                            - searching : O(logn)
+                            - inserting : O(n)
+                            - removing : O(n)
+                        [2] 성능
+                            - 작은 크기 ordered maps : 높은 성능
+                            - 큰 크기 ordered maps : 낮은 성능
+                            
+                            - search 빈도 높음 + insertion, remove 빈도 낮음 : 높은 성능
+                                ex. 사전, 피보나치 수열의 값 저장 등
+                            - search 빈도 낮음 + insertion, remove 빈도 높음 : 낮은 성능
+                (4) binary search tree
+                    1] 개념 : node에 key or [key-value items]를 binary tree에 저장한 tree
+                    2] 특징
+                        [1] key(u) <= key(v) <= key(w)
+                            u : v의 왼쪽 subtree
+                            w : v의 오른쪽 subtree
+                            - 왼쪽 node, 오른쪽 node에서 비교할 수 있는 관계 성립 ♣
+                        [2] external node : item 저장x ♣
+                        [3] inorder traversal : key 오름차순 방문 가능
+            2) 알고리즘
+                (1) Search
+                    Algorithm TreeSearch(T, p, k)
+                        if (k == p.key()) then                                  // k가 p.key와 같으면 성공
+                            return p
+                        else if k < p.key() and T.left(p) is not None then      // k가 p.key보다 작은 경우 recursive 반복
+                            return TreeSearch(T, T.left(p), k)
+                        else if k > p.key() and T.right(p) is not None then     // k가 p.key보다 큰 경우 recursive 반복
+                            return TreeSearch(T, T.right(p), k)
+                        return p                                                // k와 정확히 같은값 찾기 실패
+                (2) insertion
+                    - put(k, o)
+                    - k를 node w에 insert + w를 internal node로 확장(w의 leaf 없는 경우 추가)
+
+                    Algorithm TreeInsert(T, k, v)
+                        if k == p.key() then
+                            p의 값을 v로 설정
+                        else if k < p.key()
+                            item (k, v)인 node를 p의 왼쪽 자식에 추가
+                        else if k > p.key()
+                            item (k, v)인 node를 p의 오른쪽 자식에 추가
+                (3) deletion
+                    - key k가 v node에 저장되어있다고 생각하고, k 지우는 경우 생각
+                    - v node가 leaf child인 w를 가지고 있다면, v와 w 제거
+                    - removeExternal(w)
+
+                    -> inorder traversal을 통해 v 뒤에 따라오는 internal node w를 순차적으로 찾기
+                    -> key(w)를 node v에 복사
+                    -> node w, node w의 leaf child z 제거 = removeExternal(z)
+                (4) 성능
+                    1] 시간복잡도
+                        - space : O(n)
+                        - search : O(h)
+                        - update : O(h)
+                        - height : 최악 O(n) / 최선 O(logn) ♣
+                        
+                        n : ordered map item 개수
+                        h : binary search tree height
+
+        2. Balanced search trees
+            1) 개념
+                standard binary search tree 시간복잡도 : 최악 O(n) / 최선 O(logn)
+                balanced search tree : restructuring -> 항상 O(logn)
+            2) 종류
+                (1) AVL Trees
+                (2) Splay Trees
+                (3) (2, 4) Trees
+                (4) Red-Black Trees
+
 
 """

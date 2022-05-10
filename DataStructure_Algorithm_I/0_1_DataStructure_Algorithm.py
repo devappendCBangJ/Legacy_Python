@@ -631,26 +631,26 @@
                 1]
         3) 시간복잡도 : O(nlogn)
 
-    ● Search Trees
+    ● Search Trees ♣♣♣
         1. Binary search trees
             1) 개요
-                (1) ordered maps
+                (1) Ordered Maps
                     1] 개념 : key 기준으로 sorting된 map
                     2] 특징
                         [1] 원하는 key인 k에 가장 가까운 기존 item 내의 key 추출 가능
                             - k보다 작거나 같은 가장 큰 key인 item
                             - k보다 크거나 같은 가장 작은 key인 item
-                (2) binary search
+                (2) Binary Search
                     1] 개념 : 배열로 구현된 ordered maps(key 기준 sorting된 map)에서 search
                     2] 특징
                         [1] 시간복잡도 : O(logn)
-                (3) search tables
+                (3) Search Tables
                     1] 개념 : 배열로 구현된 ordered maps(key 기준 sorting된 map)에서 search
                     2] 특징
                         [1] 시간복잡도
                             - searching : O(logn)
-                            - inserting : O(n)
-                            - removing : O(n)
+                            - inserting : n/2 -> O(n)
+                            - removing : n/2 -> O(n)
                         [2] 성능
                             - 작은 크기 ordered maps : 높은 성능
                             - 큰 크기 ordered maps : 낮은 성능
@@ -658,15 +658,15 @@
                             - search 빈도 높음 + insertion, remove 빈도 낮음 : 높은 성능
                                 ex. 사전, 피보나치 수열의 값 저장 등
                             - search 빈도 낮음 + insertion, remove 빈도 높음 : 낮은 성능
-                (4) binary search tree
+                (4) Binary Search Tree
                     1] 개념 : node에 key or [key-value items]를 binary tree에 저장한 tree
                     2] 특징
                         [1] key(u) <= key(v) <= key(w)
-                            u : v의 왼쪽 subtree
-                            w : v의 오른쪽 subtree
+                            - u : v의 왼쪽 subtree
+                            - w : v의 오른쪽 subtree
                             - 왼쪽 node, 오른쪽 node에서 비교할 수 있는 관계 성립 ♣
                         [2] external node : item 저장x ♣
-                        [3] inorder traversal : key 오름차순 방문 가능
+                        [3] inorder traversal : key 오름차순 방문
             2) 알고리즘
                 (1) Search
                     Algorithm TreeSearch(T, p, k)
@@ -677,7 +677,7 @@
                         else if k > p.key() and T.right(p) is not None then     // k가 p.key보다 큰 경우 recursive 반복
                             return TreeSearch(T, T.right(p), k)
                         return p                                                // k와 정확히 같은값 찾기 실패
-                (2) insertion
+                (2) Insertion
                     - put(k, o)
                     - k를 node w에 insert + w를 internal node로 확장(w의 leaf 없는 경우 추가)
 
@@ -688,12 +688,12 @@
                             item (k, v)인 node를 p의 왼쪽 자식에 추가
                         else if k > p.key()
                             item (k, v)인 node를 p의 오른쪽 자식에 추가
-                (3) deletion
+                (3) Deletion
                     - key k가 v node에 저장되어있다고 생각하고, k 지우는 경우 생각
                     - v node가 leaf child인 w를 가지고 있다면, v와 w 제거
                     - removeExternal(w)
 
-                    -> inorder traversal을 통해 v 뒤에 따라오는 internal node w를 순차적으로 찾기
+                    - inorder traversal을 통해 v의 뒷순서인 internal node w를 inorder traversal로 찾기
                     -> key(w)를 node v에 복사
                     -> node w, node w의 leaf child z 제거 = removeExternal(z)
                 (4) 성능
@@ -708,13 +708,108 @@
 
         2. Balanced search trees
             1) 개념
-                standard binary search tree 시간복잡도 : 최악 O(n) / 최선 O(logn)
-                balanced search tree : restructuring -> 항상 O(logn)
+                - Standard Binary Search Tree 시간복잡도 : 최악 O(n) / 최선 O(logn)
+                - Balanced Search Tree : Restructuring -> 항상 O(logn)
             2) 종류
                 (1) AVL Trees
                 (2) Splay Trees
                 (3) (2, 4) Trees
                 (4) Red-Black Trees
+
+                (1) AVL Trees
+                    1] 특징
+                        [1] Binary Search Tree
+                        [2] 형제 위치에 있는 internal node간 자식 높이차 : 1이 최대
+                    2] 동작
+                        [1] Insertion
+                            - EXternal node의 확장 발생
+                        [2] Deletion
+                            - External node의 제거 발생
+                                -> imbalance 발생
+                                -> rebalancing 필요
+                            - Rebalancing
+                                제거된 node의 부모 node부터 traveling up해서 첫번째 unbalanced node 찾기
+                                -> 해당 unbalanced node 기준으로 더 큰 높이를 가진 자식 node가 올라가도록 Rotation
+                        [3] Restructuring
+                            1]] Single rotation
+                            2]] Double rotation
+                    3] 예시
+                        강의자료 참조
+                (2) Splay Trees
+                    1] 개념 - SPlaying
+                        - 새로운 node 들어오면, root node로 올림
+                    2] 특징
+                        [1] Binary Search Tree
+                            - 자료 저장 : internal node에 저장
+                            - 왼쪽 하위 트리 key <= v의 key <= 오른쪽 하위 트리 key ♣♣ v???
+                        [2] 모든 Operation 이후, Rotation 수행
+                        [3] 시간복잡도 : O(h)
+                            - 최악 시간복잡도 : O(n)
+                            - 최선 시간복잡도 : O(1)
+                            - 많은 경우 O(1) but 최악 O(n)이므로 속도 일정x. real-time system에서 사용하기 어려울 수 있음
+                    3] 동작
+                        [1] Zig = Right Rotation
+                        [2] Zag = Left Rotation
+                        [3] Zig + Zig
+                        [4] Zag + Zag
+                        [5] Zig + Zag
+                    4] 예시
+                        강의자료 참조
+                (3) (2, 4) Trees
+                    1] 개념
+                        - 2 ~ 4개 child 갖는 tree
+                    2] 특징
+                        [1] key 순서
+                            k = k_i (i = 1, 2, ..., d-1)
+                            k < k_i
+                            k_(i-1) < k < k_i
+                            k_(d-1) < k
+                        [2] leaf : placeholder 역할o. item 저장x
+                    3] 동작
+                        [1] Inorder Traversal
+                            - 오름차순 순차적 방문
+                        [2] Searching
+                            1]] k = k_i (i = 1, 2, ..., d-1) : 탐색 완료
+                            2]] k < k_1 : 자식 node v_1에서 탐색 이어감
+                            3]] k_(i-1) < k < k_i : 자식 node v_i에서 탐색 이어감
+                            4]] k_(d-1) < k : 자식 node v_d에서 탐색 이어감
+                        [3] Insertion
+                            if. 5 node : overflow + split
+                        [4] Deletion
+                            if. empty node : underflow + fusion
+                    4] 예시
+                        강의자료 참조
+                (4) Red-Black Trees
+                    1] 개념
+                        - (2, 4) tree에서 red, black node 개념 추가
+                            red node : 동일 계층
+                            black node : 상하 계층
+                    2] 특징
+                        [1] 구조 : Binary Tree
+                        [2] Color 특징
+                            1]] Root : 항상 black
+                            2]] Leaf : 항상 black
+                            3]] red node의 자식 : 항상 black (no double black)
+                            4]] depth : 모든 leaf에서 항상 같은 black depth
+                        [3] 시간복잡도 : O(logn) 일정
+                    3] 동작
+                        [1] Insertion
+                            if. Child-Parent사이 Double Red 발생
+                                1]] Restructuring
+                                    - 형제 위치는 검정인 경우
+                                    - (2, 4) tree Restructuring과 동일
+                                    - (2, 4) tree 관점에서 형태 유지
+                                2]] Recoloring
+                                    - 형제 위치도 빨강인 경우
+                                    - 부모 node가 root가 아니면 red로 변경 + 형제 node 둘다 black으로 변경
+                                    - (2, 4) tree 관점에서 split 발생
+                        [2] Deletion
+                            1]] Deletion 노드(부모 node) or 자식 node 빨강인 경우
+                                - 자식 1개를 black으로 변환하여 남김
+                            2]] Deletion 노드(부모 node) and 자식 node 검정인 경우
+                                - 자식 1개를 double black으로 변환하여 남김
+                                - double black : 모든 leaves가 같은 black depth를 가지지 않기 때문에, 규칙 위반
+                                    -> Restructuring 실시 ♣
 
 
 """

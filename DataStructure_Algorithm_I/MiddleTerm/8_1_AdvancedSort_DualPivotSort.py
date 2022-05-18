@@ -9,35 +9,47 @@ def DualPivotQuick_sort(arr, low, high):
         DualPivotQuick_sort(arr, rp + 1, high)
 
 def partition(arr, low, high):
-    if arr[low] > arr[high]:
+    # pivot1, pivot2, curr, left, right 지정
+    if arr[low] > arr[high]:        # low 값 = pivot1 값, high 값 = pivot2 값로 지정하려고 하는데 pivot1이 pivot2보다 작아지도록 만듦
         arr[low], arr[high] = arr[high], arr[low]
 
-    j = k = low + 1
-    g, p, q = high - 1, arr[low], arr[high]
+    left = curr = low + 1           # low 값 = pivot1 값, high 값 = pivot2 값이므로, low + 1, high - 1부터 시작
+    right, pivot1, pivot2 = high - 1, arr[low], arr[high]
 
-    while k <= g:
-        if arr[k] < p:
-            arr[k], arr[j] = arr[j], arr[k]
-            j += 1
+    # low + 1 ~ high - 1까지 반복
+    while curr <= right:            # curr 인덱스가 right 인덱스보다 작거나 같은 경우
+        # curr 값 < pivot1 값 : curr을 왼쪽 영역에 넣음
+        if arr[curr] < pivot1:      # curr 값이 pivot1 값보다 작은 경우
+            arr[curr], arr[left] = arr[left], arr[curr]     # curr 값과 left 값 swap
+            left += 1               # left 인덱스 증가
 
-        elif arr[k] >= q:
-            while arr[g] > q and k < g:
-                g -= 1
+        # curr 값 > pivot2 값
+            # right 값 > pivot2 값 & curr 인덱스 < right 인덱스 : right를 오른쪽 영역에 넣음
+            # 무조건 : curr을 오른쪽 영역에 넣음
+            # curr 값(직전 코드에서 right 값과 curr 값을 스왑했으므로 원래는 right 값이었음) < pivot1 값 : curr을 왼쪽 영역에 넣음
+        elif arr[curr] >= pivot2:   # curr 값이 pivot2 값보다 크거나 같은 경우
+            while arr[right] > pivot2 and curr < right:     # right 값이 pivot2보다 크고, left가 right보다 작은 경우
+                right -= 1          # right 인덱스 감소
 
-            arr[k], arr[g] = arr[g], arr[k]
-            g -= 1
+            arr[curr], arr[right] = arr[right], arr[curr]   # curr 값과 right 값 swap
+            right -= 1              # right 인덱스 감소
+            
+            # 아래서 curr을 1개 증가시켜서 다시 오지 않을 것이므로 이 작업도 필수
+            if arr[curr] < pivot1:  # curr 값이 pivot1 값보다 작은 경우
+                arr[curr], arr[left] = arr[left], arr[curr] # curr 값과 left 값 swap
+                left += 1           # left 인덱스 증가
+        curr += 1                   # curr 인덱스 증가
 
-            if arr[k] < p:
-                arr[k], arr[j] = arr[j], arr[k]
-                j += 1
-        k += 1
-    j -= 1
-    g += 1
+    # left, right 원위치 : while문을 다시 돌리려고 left -= 1, right += 1했는데 while 다시 안돌아서 내려온 것이므로 원위치 시켜줌
+    left -= 1                       # left 인덱스 감소
+    right += 1                      # right 인덱스 증가
 
-    arr[low], arr[j] = arr[j], arr[low]
-    arr[high], arr[g] = arr[g], arr[high]
+    # pivot1, pivot2 본래 위치로 swap
+    arr[low], arr[left] = arr[left], arr[low]               # low 값과 left 값 swap
+    arr[high], arr[right] = arr[right], arr[high]           # high 값과 right 값 swap
 
-    return j, g
+    # pivot1, pivot2 인덱스 반환
+    return left, right
 
  # Average Filter : 실행 시간 계속 달라지므로 여러번 반복하여 평균 취함
 tot_time = 0

@@ -19,19 +19,19 @@ def merge_sort(arr):
 
         while left <= mid and right <= high: # 배열 절반 쪼갬. 두 배열끼리 첫번째 인덱스부터 비교. 작은 것을 임시배열에 담음
             if arr[left] <= arr[right]:
-                temp[k] = (arr[left])
+                temp[k] = arr[left]
                 left += 1
             else:
-                temp[k] = (arr[right])
+                temp[k] = arr[right]
                 right += 1
             k += 1
 
         while left <= mid: # 두 배열 중 한 배열이 남으면 전부 순서대로 임시배열에 담음
-            temp[k] = (arr[left])
+            temp[k] = arr[left]
             left += 1
             k += 1
         while right <= high:
-            temp[k] = (arr[right])
+            temp[k] = arr[right]
             right += 1
             k += 1
 

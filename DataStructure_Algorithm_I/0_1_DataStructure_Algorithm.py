@@ -259,7 +259,7 @@
                 - base case에 대한 정의가 중요하다
                 - 항상 base case로 도달해야함(무한 루프에 빠지면 안된다)
             (2) recursive case : 재귀 호출을 써야 답 추출 가능한 경우
-        3) 예시
+        3) 예시 알고리즘
             (1) factorial
                 1] 개념
                     n! = 1 * 2 * 3 *... * (n-1) * n
@@ -272,13 +272,13 @@
                             return 1
                         else:
                             return n * factorial(n-1)
-            (2) english ruler
+            (2) english ruler ♣♣
                 1] 개념 : 눈금자 그리기
                 2] 일부 구현
                     drawTicks(length)
                         if(length > 0) then
                             drawTicks(length - 1)
-                            주어진 길이의 tick을 draw
+                            주어진 length의 tick을 draw
                             drawTicks(length - 1)
                 3] 전체 구현
                     # 선 그리기
@@ -295,13 +295,13 @@
                             draw_line(center_length)
                             draw_interval(center_length - 1)
 
-                    # 전체 함수
+                    # 전체 함수 ♣♣
                     def draw_ruler(num_inches, major_length):
                         draw_line(major_length, '0') # 0 표시
                         for j in range(1, 1 + num_inches):
                             draw_interval(major_length - 1)
                             draw_line(major_length, str(j)) # 1, 2, 3,... 표시
-            (3) binary search
+            (3) binary search ♣♣
                 1] 개념 : 정렬되어있는 list에서 원소 탐색
                 2] 알고리즘
                     target == data[mid] : target 찾기 완료
@@ -309,7 +309,7 @@
                     target > data[mid] : mid 뒷 덩어리 recur
                 3] 전체 구현
                     def binary_search(data, target, low, high):
-                        if low > high:
+                        if low > high: ♣♣
                             return False
                         else:
                             mid = (low + high) // 2
@@ -321,7 +321,7 @@
                                 return binary_search(data, target, mid+1, high)
                 4] 특징
                     [1] 시간복잡도 : O(logn)
-                        1회 비교 시 수행시간 # 뭔소리??? ♣
+                        1회 비교 시 수행시간 # 뭔소리??? ♣♣♣
                         (mid-1)-low+1 = (low+high)/2-low <= (high-low+1)/2
                         high-(mid+1)+1 = high-(low+high)/2 <= (high-low+1)/2
         4) 종류
@@ -332,19 +332,19 @@
                         - 항상 base case로 도달해야함(무한 루프에 빠지면 안된다)
                     [2] recursive case : 재귀 호출을 써야 답 추출 가능한 경우
                         - 항상 base case로 도달해야함(무한 루프에 빠지면 안된다)
-                        - 재귀적 호출 중 어떤 호출이 필요한지 테스트 할 수 있지만, 궁극적으로 하나의 재귀 호출만 수행해야함
-                2] 예시
+                        - 재귀적 호출 중 어떤 호출이 필요한지 판단과정이 있을 수 있지만, 궁극적으로 하나의 재귀 호출만 수행해야함
+                2] 예시 알고리즘
                     [1] linear sum
                         1]] 알고리즘
                             Algorithm LinearSum(A, n):
                                 # A : 배열
                                 # n : 원소 개수
                                 # output : 배열에서 n번째 원소까지의 합
-                                if n = 1 then
+                                if n = 1 then ♣
                                     return A[0]
-                                else
+                                else ♣♣ else니까 n이 1일 때는 여기로 들어오지 않는다. n이 2 이상일때만 여기로 들어온다
                                     return LinearSum(A, n-1) + A[n-1]
-                                    
+
                             -> for문으로 짜도 된다
                     [2] reverse array
                         1]] 알고리즘
@@ -373,12 +373,12 @@
                             P(x, n) = 1                 (if n = 0)
                             P(x, n) = x * p(x, n-1)     (else)
 
-                            -> O(n)
+                            -> 시간 복잡도 : O(n)
                             -> for문으로 짜도 된다
                         2]] 알고리즘2
-                            P(x, n) = 1                     (if x = 0)
-                            P(x, n) = x * P(x, (n-1)/2)^2   (if x > 0 is odd)
-                            P(x, n) = p(x, n/2)^2           (if x > 0 is even)
+                            P(x, n) = 1                     (if n = 0)
+                            P(x, n) = x * (P(x, (n-1)/2)^2)   (if n > 0 is odd)
+                            P(x, n) = p(x, n/2)^2           (if n > 0 is even)
 
                             Algorithm Power(x, n):
                                 # x : 밑
@@ -393,7 +393,7 @@
                                     y = power(x, n/2)       # O(logn)
                                     return y * y
 
-                            -> O(logn)
+                            -> 시간 복잡도 : O(logn)
                             -> for문으로 짜도 된다
             (2) tail recursion
                 1] 개념 : last step에서 recursive call 발생
@@ -415,7 +415,7 @@
                         drawTicks(length)
                             if(length > 0) then
                                 drawTicks(length - 1)
-                                주어진 길이의 tick을 draw
+                                주어진 length의 tick을 draw
                                 drawTicks(length - 1)
                     [2] binary sum
                         Algorithm BinarySum(A, i, n):
@@ -426,7 +426,7 @@
                             if n = 1 then
                                 return A[i]
                             return BinarySum(A, i, n/2) + BinarySum(A, i + n/2, n/2)
-                    [3] fibonacci numbers 비효율적 방법
+                    [3] fibonacci numbers 비효율적 방법 ♣♣♣
                         F_0 = 0
                         F_1 = 1
                         F_i = F_(i-1) + F_(i-2)         (if i > 1)
@@ -439,8 +439,8 @@
                             else
                                 return BinaryFib(k-1) + BinaryFib(k-2)
 
-                        -> recursion 횟수 : n_k > 2^(k/2)
-                    [4] fibonacci numbers 효율적 방법
+                        -> recursion 횟수 : n_k > 2^(k/2) ♣♣♣
+                    [4] fibonacci numbers 효율적 방법 ♣♣♣
                         Algorithm LinearFib(k):
                             # k : 피보나치 계산 횟수
                             # output : 피보나치 수 쌍 = F_k, F_(k-1)
@@ -450,11 +450,11 @@
                                 (i, j) = LinearFib(k-1)
                                 return (i+j, i)
 
-                        -> recursion 횟수 : n_k = k-1
+                        -> recursion 횟수 : n_k = k-1 ♣♣♣
             (4) multiple recursion
                 1] 개념 : 많은 recursive call 발생(1 or 2번이 아님)
                 2] 예시
-                    [1] summation puzzles
+                    [1] summation puzzles ♣♣♣ 뭔소리???
                         pot + pan = bib     // 421 + 437 = 858 (p=4, o=2, t=1, a=3, n=7, b=8, i=5)
                         dog + cat = pig
                         boy + girl = baby
@@ -466,23 +466,27 @@
                 (2) 활용 : searching, inserting, deleting 등
                 (3) 같은 key의 여러 item 허용x
             2) 예시
-                (1) address book
-                (2) student-record database
-                (3) python의 dict class
+                ex1. address book
+                ex2. student-record database
+                ex3. python의 dict class
+                ex4. 비트 코인
+                ex5. 전자 증명서(공인 인증 등...)
             3) ADT
                 M[k] : map M에서 key k와 관련된 value v return
                 M[k] = v : map M에서 key k와 관련된 value v를 replacing
                 del M[k] : map M에서 key k와 관련된 item remove
                 len(M) : map M에서 item의 개수
                 iter(M) : map M에서 key 순서대로 순회
-                k in M : map M에 key k 존재 시, true return
-                M.get(k, d=None) : map M에 key k 존재 시, value v return / 그렇지 않은 경우, value d return
-                M.setdefault(k, d) : map M에 key k 존재 시, value v return / 그렇지 않은 경우, M[k] = d 대입 + value d return
-                M.pop(k, d = None) : map M에서 key k와 관련된 item remove + value v return / 그렇지 않은 경우, value d return
-            4) 구현
-                (1) Simple List-Based Map
+                k in M : map M에 key k 존재 시, true return ♣♣
+                M.get(k, d=None) : map M에 key k 존재 시, value v return / 그렇지 않은 경우, value d return ♣♣
+                M.setdefault(k, d) : map M에 key k 존재 시, value v return / 그렇지 않은 경우, M[k] = d 대입 + value d return ♣♣
+                M.pop(k, d=None) : map M에서 key k와 관련된 item remove + value v return / 그렇지 않은 경우, value d return ♣♣
+            4) ADT 예시
+                - 강의자료 참조
+            5) 구현
+                (1) Simple List-Based Map ♣♣
                     1] 특징
-                        [1] 구현 : unsorted list로 구현
+                        [1] 구현 : unsorted list로 구현 ♣♣
                         [2] 유용한 경우
                             - 작은 size의 map
                             - insertion 자주 발생하는 map
@@ -512,21 +516,21 @@
                                     h2 : integers -> [0, N-1]
                                 [[2]] 활용 예시
                                     - Division : h2(y) = y mod N
-                                        N : 충돌 가능성 낮추기 위해 '소수' 사용 ♣
-                                    - Multiply & Add & Divide : h2(y) = (ay + b) mod N
-                                        a, b : 음이 아닌 정수 ♣
+                                        N : 충돌 가능성 낮추기 위해 '소수' 사용 ♣♣
+                                    - Multiply & Add & Divide(MAD) : h2(y) = (ay + b) mod N
+                                        a, b : 음이 아닌 정수 ♣♣
                         [3] 예시
-                            1]] SSN
+                            1]] SSN(Social Security Number)
                                 배열 크기 N = 10,000
                                 h(x) = x의 마지막 4자리 수
                         [4] 성능
-                            - collision의 개수와 높은 연관성
-                            - 적절한 수치 선택 by 목적
-                            1]] collision감소, address space증가
-                                ex. data개수 << N개수
-                            2]] collision증가, address space감소
-                                ex. data개수 = N개수
-                        [5] 실제 구현
+                            1]] collision의 개수와 높은 연관성
+                            2]] 적절한 수치 선택 by 목적
+                                [[1]] collision감소, address space증가
+                                    ex. data개수 << N개수
+                                [[2]] collision증가, address space감소
+                                    ex. data개수 = N개수
+                        [5] 코드 구현
                             강의자료 참조
                     2] Collision Handling
                         [1] 개념 : 서로 다른 원소가 같은 cell에 map되었을 때 대처
@@ -536,20 +540,20 @@
                                 [[2]] 특징
                                     - 간단한 구현
                                     - 추가 메모리 필요
-                                [[3]] 알고리즘
+                                [[3]] 알고리즘 ♣♣♣
                                     Algorithm get(k)
                                         return A[h(k)].get(k)
-                                    Algorithm put(k, n)
-                                        t = A[h(k)].put(k, n)
-                                        if t = null then        (k is a new key) ♣
+                                    Algorithm put(k, v)
+                                        t = A[h(k)].put(k, v)
+                                        if t = null then        (k is a new key) ♣♣♣
                                             n = n + 1
                                         return t
                                     Algorithm remove(k)
-                                        t = A[h(k)].remove(k)   (k was found) ♣
-                                        if t != null then
+                                        t = A[h(k)].remove(k)
+                                        if t != null then       (k was found) ♣♣♣
                                             n = n - 1
                                         return t
-                                [[4]] 실제 구현
+                                [[4]] 코드 구현
                                     강의자료 참조
                             2]] Open Addressing - Linear Probing
                                 [[1]] 개념 : 충돌 item을 다음 남은 table cell에 넣음
@@ -565,8 +569,8 @@
                                     32 -> 6 -> 7 -> 8
                                     31 -> 5 -> 6 -> 7 -> 8 -> 9 -> 10
                                     73 -> 8 -> 9 -> 10 -> 11
-                                [[3]] 알고리즘
-                                    1]]] Searching
+                                [[3]] 알고리즘 ♣♣♣
+                                    1]]] Searching ♣♣♣
                                         Algorithm get(k)
                                             i <- h(k)
                                             p <- 0
@@ -581,55 +585,62 @@
                                                     p <- p + 1
                                             until p = N                     // p 개수가 배열 개수와 같아질때까지 반복
                                             return null
-                                    2]]] updating
+                                    2]]] updating ♣♣♣
                                         key k 탐색
                                             (k, o) 발견 시, 삭제하지 않음. special item인 available로 바꿈
                                                 이렇게 해서 나중에 Searching 할 때, An empty cell is found가 되지 않도록 함
                                                 + 나중에 Inserting 할 때, available에도 data 넣을 수 있도록 함
                                     3]]] put(k, o)
-
                                         Algorithm put(k, o)
-                                [[4]] 실제 구현
+                                [[4]] 코드 구현
                                     강의자료 참조
-                            3]] Open Addressing - Double Hashing(Double Probing)
+                            3]] Open Addressing - Double Hashing(Double Probing) ♣♣♣
                                 [[1]] 개념 : 2개 hash func 사용 + 충돌 item을 다음 남은 table cell에 넣음
-                                    - h(k) = k mod N
-                                    - d(k) = (q - k) mod q
-                                    - (i + jd(k)) mod N     // d(k) >= 0
+                                    1]]] 기준1(충돌 없을 시 사용) : h(k) = k mod N
+                                    2]]] 기준2(충돌 시 사용) : (i + jd(k)) mod N     // d(k) >= 0
+                                        - d(k) = (q - k) mod q
+
+                                     k : key
+                                     N : 배열 개수
+                                     q : 사용자 임의 지정
+                                     i : key
+                                     j : 사용자 임의 지정
                                 [[2]] 특징
-                                    - 시간 복잡도
+                                    - 시간 복잡도 ♣♣♣
                                         Searching, Inserting, Removing on Hash table
-                                        최악 : O(n)
-                                        대부분 : O(1)
+                                        최악 : O(n) # 거의 이런 경우 없다
+                                        대부분 : O(1) # 거의 이와 가깝다
+                                        
+                                        - 실제 경우에서 매우 빠르다
                                 [[3]] 비교
                                     - linear probing : 한 뭉탱이로 data 몰려있으면 probing 연산 증가
                                     - double probing : 한 뭉탱이로 data 몰려있어도 점프해서 data 넣기 때문에 probing 연산 감소
-                                [[4]] 예시 ♣
-                                    - Small Database
-                                    - Compilers
-                                    - Browser Caches
-                                [[4]] 예시
-                                    N = 13
-                                    h(k) = k mod 13         // i mod N
-                                    d(k) = 7 - k mod 7      // (i + jd(k)) mod N
+                                [[4]] 예시 ♣♣♣
+                                    ex1. Small Database
+                                    ex2. Compilers
+                                    ex3. Browser Caches
+                                [[4]] 예시 ♣♣
+                                    강의자료 참조
 
     ● Skip List
-        1) 특징
-            (1) special key인 -∞ ~ +∞ 포함
-            (2) key는 오름차순
-            (3) S_h ⊂ ... S_1 ⊂ S_0
-        2) 알고리즘
+        1) 특징 ♣♣♣
+            (1) special key 포함 : -∞ ~ +∞ 포함
+            (2) key 정렬 : 오름차순
+            (3) list별 포함 관계 : S_h ⊂ ... S_1 ⊂ S_0
+            (4) 구현 : quad node 활용
+            (5) 시간복잡도 : O(nlogn)
+        2) 알고리즘 ♣♣♣
             (1) Searching
+                - x의 위치를 찾고자함
                 1] top list의 첫번째 위치 p부터 탐색
                 2] 현재 위치 p에서 x <-> y = key(next(p)) 비교
                     [1] x = y : return element(next(p))
                     [2] x > y : scan forward
                     [3] x < y : drop down
             (2) Insertion
-                1] 
+                강의자료 참조
             (3) Deletion
-                1]
-        3) 시간복잡도 : O(nlogn)
+                강의자료 참조
 
     ● Search Trees ♣♣♣
         1. Binary search trees
@@ -643,7 +654,7 @@
                 (2) Binary Search
                     1] 개념 : 배열로 구현된 ordered maps(key 기준 sorting된 map)에서 search
                     2] 특징
-                        [1] 시간복잡도 : O(logn)
+                        [1] 시간복잡도 : O(logn) ♣
                 (3) Search Tables
                     1] 개념 : 배열로 구현된 ordered maps(key 기준 sorting된 map)에서 search
                     2] 특징
@@ -654,13 +665,13 @@
                         [2] 성능
                             - 작은 크기 ordered maps : 높은 성능
                             - 큰 크기 ordered maps : 낮은 성능
-                            
+
                             - search 빈도 높음 + insertion, remove 빈도 낮음 : 높은 성능
                                 ex. 사전, 피보나치 수열의 값 저장 등
                             - search 빈도 낮음 + insertion, remove 빈도 높음 : 낮은 성능
                 (4) Binary Search Tree
                     1] 개념 : node에 key or [key-value items]를 binary tree에 저장한 tree
-                    2] 특징
+                    2] 특징 ♣♣♣
                         [1] key(u) <= key(v) <= key(w)
                             - u : v의 왼쪽 subtree
                             - w : v의 오른쪽 subtree
@@ -677,11 +688,12 @@
                         else if k > p.key() and T.right(p) is not None then     // k가 p.key보다 큰 경우 recursive 반복
                             return TreeSearch(T, T.right(p), k)
                         return p                                                // k와 정확히 같은값 찾기 실패
-                (2) Insertion
+                (2) Insertion ♣♣♣
                     - put(k, o)
-                    - k를 node w에 insert + w를 internal node로 확장(w의 leaf 없는 경우 추가)
+                    - k를 node w에 insert + w를 internal node로 확장(w의 leaf가 없으면 추가)
 
                     Algorithm TreeInsert(T, k, v)
+                        p = TreeSearch(T, T.root(), k)
                         if k == p.key() then
                             p의 값을 v로 설정
                         else if k < p.key()
@@ -699,15 +711,15 @@
                 (4) 성능
                     1] 시간복잡도
                         - space : O(n)
-                        - search : O(h)
-                        - update : O(h)
+                        - search : O(h) ♣♣♣
+                        - update : O(h) ♣♣♣
                         - height : 최악 O(n) / 최선 O(logn) ♣
-                        
+
                         n : ordered map item 개수
                         h : binary search tree height
 
         2. Balanced search trees
-            1) 개념
+            1) 개념 ♣♣
                 - Standard Binary Search Tree 시간복잡도 : 최악 O(n) / 최선 O(logn)
                 - Balanced Search Tree : Restructuring -> 항상 O(logn)
             2) 종류
@@ -716,34 +728,42 @@
                 (3) (2, 4) Trees
                 (4) Red-Black Trees
 
-                (1) AVL Trees
+                (1) AVL Trees ♣♣♣
                     1] 특징
                         [1] Binary Search Tree
                         [2] 형제 위치에 있는 internal node간 자식 높이차 : 1이 최대
+                        [3] leaf : placeholder 역할o. item 저장x
                     2] 동작
                         [1] Insertion
-                            - EXternal node의 확장 발생
+                            - External node의 확장 발생
+                                -> imbalance 발생
+                                -> rebalancing 필요
                         [2] Deletion
                             - External node의 제거 발생
                                 -> imbalance 발생
                                 -> rebalancing 필요
                             - Rebalancing
                                 제거된 node의 부모 node부터 traveling up해서 첫번째 unbalanced node 찾기
-                                -> 해당 unbalanced node 기준으로 더 큰 높이를 가진 자식 node가 올라가도록 Rotation
+                                -> 해당 unbalanced node 기준으로 더 큰 높이를 가진 자식 node가 올라가도록 Rotation ♣♣♣
                         [3] Restructuring
+                            - 형제 위치에 있는 internal node간 자식 높이차가 2 이상일 때, 자식의 높이가 더 큰쪽을 위로 올림.
+                                만약, [왼쪽에 있는 자식]을 [부모]로 올리려면, [왼쪽에 있는 자식]의 [오른쪽에 자식]이 있으면 안된다.
+                                이런 경우에는 [왼쪽에 있는 자식의 오른쪽에 해당하는 자식]을 2번 rotation해서 [부모] 위치까지 올린다.
+                            - 반대의 경우도 좌우를 바꿔서 생각하면 된다 ♣♣♣
+
                             1]] Single rotation
                             2]] Double rotation
                     3] 예시
                         강의자료 참조
-                (2) Splay Trees
-                    1] 개념 - SPlaying
+                (2) Splay Trees ♣♣♣
+                    1] 개념 of Splaying
                         - 새로운 node 들어오면, root node로 올림
                     2] 특징
                         [1] Binary Search Tree
                             - 자료 저장 : internal node에 저장
-                            - 왼쪽 하위 트리 key <= v의 key <= 오른쪽 하위 트리 key ♣♣ v???
+                            - 왼쪽 하위 트리 key <= v의 key <= 오른쪽 하위 트리 key
                         [2] 모든 Operation 이후, Rotation 수행
-                        [3] 시간복잡도 : O(h)
+                        [3] 시간복잡도 : O(h) ♣♣♣
                             - 최악 시간복잡도 : O(n)
                             - 최선 시간복잡도 : O(1)
                             - 많은 경우 O(1) but 최악 O(n)이므로 속도 일정x. real-time system에서 사용하기 어려울 수 있음
@@ -755,16 +775,18 @@
                         [5] Zig + Zag
                     4] 예시
                         강의자료 참조
-                (3) (2, 4) Trees
+                (3) (2, 4) Trees ♣♣♣
                     1] 개념
                         - 2 ~ 4개 child 갖는 tree
                     2] 특징
-                        [1] key 순서
+                        [1] Binary Search Tree
+                        [2] 2 ~ 4개 child 갖는 tree
+                        [3] key 순서
                             k = k_i (i = 1, 2, ..., d-1)
                             k < k_i
                             k_(i-1) < k < k_i
                             k_(d-1) < k
-                        [2] leaf : placeholder 역할o. item 저장x
+                        [4] leaf : placeholder 역할o. item 저장x
                     3] 동작
                         [1] Inorder Traversal
                             - 오름차순 순차적 방문
@@ -779,9 +801,9 @@
                             if. empty node : underflow + fusion
                     4] 예시
                         강의자료 참조
-                (4) Red-Black Trees
+                (4) Red-Black Trees ♣♣♣
                     1] 개념
-                        - (2, 4) tree에서 red, black node 개념 추가
+                        - (2, 4) tree를 balanced binary tree로 나타내기 위해 red, black node 개념 추가
                             red node : 동일 계층
                             black node : 상하 계층
                     2] 특징
@@ -789,7 +811,7 @@
                         [2] Color 특징
                             1]] Root : 항상 black
                             2]] Leaf : 항상 black
-                            3]] red node의 자식 : 항상 black (no double black)
+                            3]] red node의 자식 : 항상 black (no double red)
                             4]] depth : 모든 leaf에서 항상 같은 black depth
                         [3] 시간복잡도 : O(logn) 일정
                     3] 동작
@@ -809,7 +831,7 @@
                             2]] Deletion 노드(부모 node) and 자식 node 검정인 경우
                                 - 자식 1개를 double black으로 변환하여 남김
                                 - double black : 모든 leaves가 같은 black depth를 가지지 않기 때문에, 규칙 위반
-                                    -> Restructuring 실시 ♣
+                                    -> Restructuring 실시 ♣♣♣
 
 
 """

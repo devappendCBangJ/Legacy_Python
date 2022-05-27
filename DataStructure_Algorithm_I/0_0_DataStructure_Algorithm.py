@@ -54,7 +54,7 @@
                 2] 추상화(Abstraction)
                 3] 캡슐화(Encapsulation) : 은닉 가능
             (2) 과정
-                1] Class 정의 : porperty & method 정의
+                1] Class 정의 : property & method 정의
                 2] 생성자(Constructors) : instance 생성
                     - __init__ method로 불러옴
                 3] 함수 오버로딩(Operator Overloading) : operation에 다양한 기능 부여
@@ -118,7 +118,7 @@
                 [2] tuple
                 [3] str
 
-            (2) 저장 방법
+            (2) 종류
                 1] array list
                     [1] 특징
                         - 쉬운 사용
@@ -138,16 +138,20 @@
             (1) insertion
                 - 해당 인덱스부터 한칸씩 뒤로 밀음 + 해당 원소 삽입
                 - 시간복잡도 : O(n)
+                    평균 : O(n/2)
             (2) remove
                 - 해당 원소 제거 + 해당 인덱스 뒤부터 한칸씩 앞으로 당김
                 - 시간복잡도 : O(n)
+                    평균 : O(n/2)
             (3) 배열 확장 ♣♣
                 1] Incremental strategy : size + constant c
-                    - n + c + 2c + ... + kc
+                    - n + c + 2c + ... + kc = n + ck(k+1)/2
                     - T(n) = O(n + k^2)
                 2] Doubling strategy : size x2
                     - T(n) = O(n)
             (4) 다차원 list
+
+        3) list operations
 
     4. Stack
         0) ADT(Abstract Data Types) ♣♣
@@ -253,7 +257,7 @@
                     ex1. Waiting lists / CPU Scheduling / Disk Scheduling
                     ex2. Access to shared resources
                     ex3. Multiprogramming / Scheduling
-                    ex4. Iterrupts in real-time systems
+                    ex4. Interrupts in real-time systems
                     ex5. Call Center
                 2] Indirect applications
                     ex6. Auxiliary data structure for algorithms
@@ -266,7 +270,7 @@
     6. Linked List
         1) Singly linked list
             (1) 특징
-                1] 구조 : 노드(head) >> 노드 >> 노드 >> ... >> 노드(tail) >> Null ♣
+                1] 구조 : 노드(head) -> 노드 -> 노드 -> ... -> 노드(tail) -> Null ♣
                     - 노드 : 원소 + next 주소
                     - 원소 : 데이터
                     - next 주소 : 다음 데이터 위치
@@ -275,10 +279,10 @@
                         - memory 뭉탱이 할당
                         - 용량 초과시 copy & paste
                     [2] Singly linked list
-                        - memory 공간 2배 할당
+                        - 기존 list보다 memory 공간 2배 할당
                         - 필요할 때마다 node 만들어 사용
                     [3] Doubly linked list
-                        - memory 공간 3배 할당
+                        - 기존 list보다 memory 공간 3배 할당
                         - 필요할 때마다 node 만들어 사용
                 3] 시간 복잡도
                     - Space : O(n)
@@ -334,7 +338,7 @@
 
         2) Doubly linked list
             (1) 특징
-                1] 구조 : header <<>> 노드 <<>> 노드 <<>> 노드 <<>> ... <<>> trailer ♣
+                1] 구조 : header <-> 노드 <-> 노드 <-> 노드 <-> ... <-> trailer ♣
                     - 노드 : 이전 주소 + 원소 + 다음 주소
                     - previous 주소 : 이전 데이터 위치
                     - 원소 : 데이터
@@ -344,10 +348,10 @@
                         - memory 뭉탱이 할당
                         - 용량 초과시 copy & paste
                     [2] Singly linked list
-                        - memory 공간 2배 할당
+                        - 기존 list보다 memory 공간 2배 할당
                         - 필요할 때마다 node 만들어 사용
                     [3] Doubly linked list
-                        - memory 공간 3배 할당
+                        - 기존 list보다 memory 공간 3배 할당
                         - 필요할 때마다 node 만들어 사용
                 3] 시간 복잡도
                     - Space : O(n)
@@ -441,12 +445,13 @@
                             for each child w of v
                                 postOrder(w)
                             visit(v)
+        4) 종류
             (2) Binary Trees ♣♣
                 1] Proper Binary Trees 특징 ♣♣
                     [1] 각 node : 최대 2개 자식(ordered pair = left node, right node)
                     [2] e = i + 1
                     [2] n = 2e - 1 = i + e
-                    [2] h >= log_2(e)
+                    [2] h >= log_2(e) ♣♣♣
                     [3] edge의 개수 : n - 1개
                         - root를 제외한 모든 node에 부모로 이어지는 edge 존재
                     - n : nodes의 개수
@@ -502,30 +507,35 @@
                         1]] 자식 0개 node : 1번 방문
                         2]] 자식 1개 node : 2번 방문
                         3]] 자식 2개 node : 3번 방문
-                    [4] Linked Structure - Binary Tree(1개 노드 당 3개 공간) ♣♣
+                5] 구현 방법 종류
+                    [1] Linked Structure - Binary Tree(1개 노드 당 3개 공간) ♣♣
                         - 3가지 저장
                             데이터
                             부모 노드
                             자식 노드
-                    [4] Linked Structure - Binary Tree(1개 노드 당 4개 공간) ♣♣
+                    [2] Linked Structure - Binary Tree(1개 노드 당 4개 공간) ♣♣
                         - 4가지 저장
                             데이터
                             부모 노드
                             왼쪽 자식 노드
                             오른쪽 자식 노드
-                    [4] Array based Binary Tree ♣♣
-                        - Full binary tree : 효율성 높음
-                        - 듬성듬성한 binary tree : 효율성 낮음
+                    [3] Array based Binary Tree ♣♣
+                        - Full binary tree를 array based로 구현 : 효율성 높음
+                        - 듬성듬성한 binary tree를 array based로 구현 : 효율성 낮음
 
                         - root node = 1
                         - parent node의 왼쪽 자식 = parent node x 2
                         - parent node의 오른쪽 자식 = parent node x 2 + 1
 
-    ● Priority Queues
+    8. Priority Queues
         1) 개요
             (1) 특징
                 1] (key, value)쌍 item 저장
                 2] key만 순서에 영향
+            (2) 활용
+                [1] Standby flyers
+                [2] Auctions
+                [3] Stock market
         2) The Priority Queue ADT
             1] Main Priority Queue Operations
                 add(k, x) : key k, value x인 item 삽입
@@ -534,10 +544,6 @@
                 min() : 최소값인 key return
                 len(P)
                 is_empty()
-            3] Applications
-                [1] Standby flyers
-                [2] Auctions
-                [3] Stock market
         3) 예시
             - 강의자료 참조
         4) 연산
@@ -580,7 +586,7 @@
                         - insert : n(n+1)/2 = O(n^2)
                         - remove_min : O(n)
 
-                        Algorithm PQSort(S, C)
+                        Algorithm PQSort(S, C) ♣♣
                             input : sequence S, S의 원소에 대한 Comparator C
                             output : C에 따라 증가하는 순서로 정렬된 sequence S
                             while ~S.is_empty()
@@ -596,12 +602,12 @@
                     1]] Complete binary tree : 마지막 level에서 조금 비어있는 tree
                     2]] Heap order : root가 아닌 모든 internal node의 부자 관계는 key(v) >= key(parent(v))
                     3]] last node : 최대 depth의 최우측 node
-                    4]] Heap의 height : O(logn)
+                    4]] Heap의 height : O(logn) ♣♣
                         key : 2^i개 (i = 0, 1, ..., h-1 depth)
-                              적어도 1개 (i = h depth)
+                            적어도 1개 (i = h depth)
                         2^h <= n
                         h <= logn
-                [3] 알고리즘
+                [3] 알고리즘 ♣♣
                     1]] insertion
                         -> insertion node인 z 탐색
                         -> z에 k 저장
@@ -614,24 +620,25 @@
                         -> root key와 last node w의 key를 swap
                         -> w 제거
                         -> heap order property 복원 by downheap
+                        -> last node 업데이트 ♣♣
 
                         - down heap
                             목적 : heap order property(internal node의 부자 관계 : key(v) >= key(parent(v))를 지키기 위함
                             시간복잡도 : O(logn)
-                    3]] update last node
-                        -> 왼쪽에 부모 있으면 따라감. 왼쪽에 부모가 없을 때까지 따라감
-                        -> 오른쪽 부모 따라감. 오른쪽 부모가 없을 때까지 따라감
-                        -> 왼쪽 자식을 따라감. 왼쪽 자식이 없을 때까지 따라감
+                        -  update last node
+                            -> 왼쪽에 부모 있으면 따라감. 왼쪽에 부모가 없을 때까지 따라감
+                            -> 오른쪽에 부모 있으면 따라감. 오른쪽에 부모가 없을 때까지 따라감
+                            -> 최대한 왼쪽에 있는 자식을 따라감. 왼쪽 자식이 없을 때까지 따라감
 
-                        [[1]] 자료저장 시간복잡도 : O(logn) = logn + logn ♣
-                        [[2]] 전체수행 시간복잡도 : O(n) ♣
-                    4]] heap sort
+                            [[1]] 자료저장 시간복잡도 : O(logn) = logn + logn ♣
+                            [[2]] 전체수행 시간복잡도 : O(n) ♣
+                    3]] heap sort
                         시간복잡도
                             space : O(n)
                             add : O(logn)
                             len, is_empty, min : O(1)
                             sort : O(nlogn)
-                    5]] merge two heaps
+                    4]] merge two heaps
                         -> 2개 heap, 1개 key k 존재
                         -> root node에 k 넣고 2개 heap을 subtree로 해서 합쳐
                         -> heap order property 복원 by downheap
@@ -640,19 +647,19 @@
                             목적 : 2개 heap을 merge하기 위함
                             시간복잡도 : O(logn)
                                 2^i - 1 keys를 가진 heap 2개를 2^(i+1) - 1의 keys를 가진 heap 1개로 병합
-                [4] 종류
-                    1]] 배열 기반 heap
+                [4] 구현 방법 종류
+                    1]] 배열 기반 heap ♣♣
                         [[1]] 개념 : 배열을 이용 heap 구현
-                        [[2]] 특징
-                            - 인덱스
-                                node number
+                        [[2]] 특징 ♣♣ Array Based Binary Tree와 인덱스를 다르게 매긴다
+                            1]]] 인덱스
+                                - node number
                                     왼쪽 자식 : 2i + 1
                                     오른쪽 자식 : 2i + 2
-                                add
+                                - add
                                     n + 1 인덱스에 원소 저장
-                                remove_min
+                                - remove_min
                                     n 인덱스의 원소 삭제
-                            - 성능 좋음
+                            2]]] 높은 성능
                 [5] 예시
                     - 강의자료 참조
 

@@ -200,7 +200,7 @@
                 2] Indirect applications ♣♣
                     ex4. Auxiliary data structure for algorithms
                     ex5. Component of other data structures
-            (2) Algorithm Ex ♣♣
+            (2) Algorithm Ex ♣♣♣ 강의자료
                 ex1. Parentheses Matching
                     - stack pair
                     push : < [ { (

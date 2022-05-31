@@ -28,9 +28,9 @@ def insertNode(findData, insertData):
 		node.link = head
 		head = node
 		return
-	current = head
 
 	# 중간 노드 insert
+	current = head
 	while current.link !=None:
 		pre = current	# 이전 노드 기억
 		current = current.link

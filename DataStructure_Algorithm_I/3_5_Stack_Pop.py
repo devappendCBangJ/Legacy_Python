@@ -36,7 +36,7 @@ def pop():
 
 SIZE = 5
 stack = ['A', None, None, None, None]
-top = 0 
+top = 0
 
 print(stack)
 retData = pop()

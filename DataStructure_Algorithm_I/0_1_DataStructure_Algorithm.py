@@ -65,7 +65,7 @@
                                 - 비교 <= n - 1 ♣ 왜 이건지는 모르겠다
                                 - 기존배열에서 임시 배열로 이동 = n
                                 - 임시배열에서 기존 배열로 이동 = n
-                                >> O(3n-1) = O(n)
+                                >> 3n-1 = O(n)
                             2]] merge 횟수(전체 depth)... 시간복잡도가 이것에 의존적 ♣
                                 >> O(logn)
                             3]] 총 시간 복잡도
@@ -120,7 +120,7 @@
                         [2] 스왑을 통해 pivot보다 작은 숫자 구역, pivot보다 큰 숫자 구역별 원소 분류(pivot 자체는 sorting에 참여 x)
                         [3] pivot도 본인 위치로 스왑
                         [4] pivot 기준 배열 2등분
-                        [5] 반복
+                        [5] 위 과정 반복
                         [6] merge
                         - 정렬 : 조각조각 내면서 분류하여, 결국 정렬
                     3] 특징
@@ -159,7 +159,7 @@
                             int p = a[i]; // pivot 선택
                             int m = i; // S1, S2가 비워진 상태에서 시작
 
-                            for(int k = i + 1; k <= j; k++){ // pivot보다 큰 인덱스부터 시작해서, 마지막 인덱스까지 순회 ♣
+                            for(int k = i + 1; k <= j; k++){ // pivot보다 큰 인덱스부터 시작해서, 마지막 인덱스까지 반복 ♣
                                 if(a[k] < p){ // case2(pivot보다 더 작은 원소인 경우) : swap o
                                     m++;
                                     swap(a[k], a[m]);
@@ -190,7 +190,7 @@
                     2] 알고리즘
                         [1] 최대 자릿수인 원소 찾기
                         [2] 최대 자릿수만큼 아래의 과정 반복
-                        [3] ...?
+                        [3] 1의 자리수부터 최대 자리수까지 한 자리씩 원소 정렬 + 원소 합치기
                     3] 특징
                         [1] 시간복잡도 : O(dn)
                             - d가 작은 경우 : O(n) 수준
@@ -321,7 +321,7 @@
                                 return binary_search(data, target, mid+1, high)
                 4] 특징
                     [1] 시간복잡도 : O(logn)
-                        1회 비교 시 수행시간 # 뭔소리??? ♣♣♣
+                        1회 비교 시 수행시간 ♣♣♣ 뭔소리???
                         (mid-1)-low+1 = (low+high)/2-low <= (high-low+1)/2
                         high-(mid+1)+1 = high-(low+high)/2 <= (high-low+1)/2
         4) 종류
@@ -361,7 +361,7 @@
                             -> for문으로 짜도 된다
                         2]] 코드 구현
                             def reverse(S, start, stop):
-                                if start < stop-1: # 배열 인덱스가 0부터 시작하기 때문에 stop-1이 마지막 원소 인덱스
+                                if start < stop-1: # 배열 인덱스가 0부터 시작하기 때문에 stop-1이 마지막 원소 인덱스 ♣♣♣
                                     S[start], S[stop-1] = S[stop-1], S[start]
                                     reverse(S, start+1, stop-1)
 
@@ -373,7 +373,7 @@
                             P(x, n) = 1                 (if n = 0)
                             P(x, n) = x * p(x, n-1)     (else)
 
-                            -> 시간 복잡도 : O(n)
+                            -> 시간 복잡도 : O(n) ♣♣♣
                             -> for문으로 짜도 된다
                         2]] 알고리즘2
                             P(x, n) = 1                     (if n = 0)
@@ -425,7 +425,7 @@
                             # output : 배열에서 n번째 원소까지의 합
                             if n = 1 then
                                 return A[i]
-                            return BinarySum(A, i, n/2) + BinarySum(A, i + n/2, n/2)
+                            return BinarySum(A, i, n/2) + BinarySum(A, i + n/2, n/2) ♣♣♣ 강의자료 그림 확인
                     [3] fibonacci numbers 비효율적 방법 ♣♣♣
                         F_0 = 0
                         F_1 = 1
@@ -437,7 +437,7 @@
                             if k = 1 then
                                 return k
                             else
-                                return BinaryFib(k-1) + BinaryFib(k-2)
+                                return BinaryFib(k-1) + BinaryFib(k-2) ♣♣♣
 
                         -> recursion 횟수 : n_k > 2^(k/2) ♣♣♣
                     [4] fibonacci numbers 효율적 방법 ♣♣♣
@@ -447,21 +447,21 @@
                             if k = 1 then
                                 return (k, 0)
                             else
-                                (i, j) = LinearFib(k-1)
+                                (i, j) = LinearFib(k-1) ♣♣♣
                                 return (i+j, i)
 
                         -> recursion 횟수 : n_k = k-1 ♣♣♣
-            (4) multiple recursion
+            (4) multiple recursion 
                 1] 개념 : 많은 recursive call 발생(1 or 2번이 아님)
                 2] 예시
-                    [1] summation puzzles ♣♣♣ 뭔소리???
+                    [1] summation puzzles ♣♣♣ 뭔소리??? 강의자료 확인
                         pot + pan = bib     // 421 + 437 = 858 (p=4, o=2, t=1, a=3, n=7, b=8, i=5)
                         dog + cat = pig
                         boy + girl = baby
 
     ● Hash Tables
         1. Map
-            1) 특징
+            1) 특징 ♣♣♣
                 (1) 검색가능한 key-value pairs items의 집단
                 (2) 활용 : searching, inserting, deleting 등
                 (3) 같은 key의 여러 item 허용x
@@ -486,8 +486,8 @@
             5) 구현
                 (1) Simple List-Based Map ♣♣
                     1] 특징
-                        [1] 구현 : unsorted list로 구현 ♣♣
-                        [2] 유용한 경우
+                        [1] 구현 : unsorted list로 구현 ♣♣♣
+                        [2] 유용한 경우 ♣♣♣
                             - 작은 size의 map
                             - insertion 자주 발생하는 map
                             - searching, removing 거의 발생하지 않는 map
@@ -503,7 +503,7 @@
                         [2] 구조
                             h(x) = h2(h1(x))
                             1]] hash code
-                                [[1]] 개념
+                                [[1]] 개념 ♣♣♣
                                     h1 : keys -> integers
                                 [[2]] 활용 예시
                                     - Memory Address : 메모리 주소 활용
@@ -512,13 +512,13 @@
                                     - Polynomial accumulation : p(z) = a0 + a_1 * z_1 + a_2 * z_2 + ... + a_(n-1) * z_(n-1)     (overflow 무시)
                                         z : fixed value
                             2]] compression func
-                                [[1]] 개념
+                                [[1]] 개념 ♣♣♣
                                     h2 : integers -> [0, N-1]
                                 [[2]] 활용 예시
                                     - Division : h2(y) = y mod N
-                                        N : 충돌 가능성 낮추기 위해 '소수' 사용 ♣♣
+                                        N : 충돌 가능성 낮추기 위해 '소수' 사용 ♣♣♣
                                     - Multiply & Add & Divide(MAD) : h2(y) = (ay + b) mod N
-                                        a, b : 음이 아닌 정수 ♣♣
+                                        a, b : 음이 아닌 정수 ♣♣♣
                         [3] 예시
                             1]] SSN(Social Security Number)
                                 배열 크기 N = 10,000
@@ -536,7 +536,7 @@
                         [1] 개념 : 서로 다른 원소가 같은 cell에 map되었을 때 대처
                         [2] 종류
                             1]] Separate Chaining
-                                [[1]] 개념 : 충돌 item을 linked list로 연결
+                                [[1]] 개념 : 충돌 item을 linked list로 연결 ♣♣♣
                                 [[2]] 특징
                                     - 간단한 구현
                                     - 추가 메모리 필요
@@ -556,7 +556,7 @@
                                 [[4]] 코드 구현
                                     강의자료 참조
                             2]] Open Addressing - Linear Probing
-                                [[1]] 개념 : 충돌 item을 다음 남은 table cell에 넣음
+                                [[1]] 개념 : 충돌 item을 다음 남은 table cell에 넣음 ♣♣♣
                                 [[2]] 예시
                                     h(x) = x mod 13
                                     insert key : 18, 41, 22, 44, 59, 32, 31, 73
@@ -612,23 +612,23 @@
                                         대부분 : O(1) # 거의 이와 가깝다
                                         
                                         - 실제 경우에서 매우 빠르다
-                                [[3]] 비교
+                                [[3]] 비교 ♣♣♣
                                     - linear probing : 한 뭉탱이로 data 몰려있으면 probing 연산 증가
                                     - double probing : 한 뭉탱이로 data 몰려있어도 점프해서 data 넣기 때문에 probing 연산 감소
                                 [[4]] 예시 ♣♣♣
                                     ex1. Small Database
                                     ex2. Compilers
                                     ex3. Browser Caches
-                                [[4]] 예시 ♣♣
+                                [[4]] 예시 ♣♣♣
                                     강의자료 참조
 
     ● Skip List
-        1) 특징 ♣♣♣
+        1) 특징 ♣♣
             (1) special key 포함 : -∞ ~ +∞ 포함
             (2) key 정렬 : 오름차순
             (3) list별 포함 관계 : S_h ⊂ ... S_1 ⊂ S_0
             (4) 구현 : quad node 활용
-            (5) 시간복잡도 : O(nlogn)
+            (5) 시간복잡도 : O(nlogn) ♣♣♣
         2) 알고리즘 ♣♣♣
             (1) Searching
                 - x의 위치를 찾고자함
@@ -645,7 +645,7 @@
     ● Search Trees ♣♣♣
         1. Binary search trees
             1) 개요
-                (1) Ordered Maps
+                (1) Ordered Maps ♣♣♣
                     1] 개념 : key 기준으로 sorting된 map
                     2] 특징
                         [1] 원하는 key인 k에 가장 가까운 기존 item 내의 key 추출 가능
@@ -654,12 +654,12 @@
                 (2) Binary Search
                     1] 개념 : 배열로 구현된 ordered maps(key 기준 sorting된 map)에서 search
                     2] 특징
-                        [1] 시간복잡도 : O(logn) ♣
-                (3) Search Tables
+                        [1] 시간복잡도 : O(logn)
+                (3) Search Tables ♣♣♣
                     1] 개념 : 배열로 구현된 ordered maps(key 기준 sorting된 map)에서 search
                     2] 특징
                         [1] 시간복잡도
-                            - searching : O(logn)
+                            - searching : O(logn) ♣♣♣
                             - inserting : n/2 -> O(n)
                             - removing : n/2 -> O(n)
                         [2] 성능
@@ -669,7 +669,7 @@
                             - search 빈도 높음 + insertion, remove 빈도 낮음 : 높은 성능
                                 ex. 사전, 피보나치 수열의 값 저장 등
                             - search 빈도 낮음 + insertion, remove 빈도 높음 : 낮은 성능
-                (4) Binary Search Tree
+                (4) Binary Search Tree ♣♣♣
                     1] 개념 : node에 key or [key-value items]를 binary tree에 저장한 tree
                     2] 특징 ♣♣♣
                         [1] key(u) <= key(v) <= key(w)
@@ -700,12 +700,12 @@
                             item (k, v)인 node를 p의 왼쪽 자식에 추가
                         else if k > p.key()
                             item (k, v)인 node를 p의 오른쪽 자식에 추가
-                (3) Deletion
+                (3) Deletion ♣♣♣
                     - key k가 v node에 저장되어있다고 생각하고, k 지우는 경우 생각
                     - v node가 leaf child인 w를 가지고 있다면, v와 w 제거
                     - removeExternal(w)
 
-                    - inorder traversal을 통해 v의 뒷순서인 internal node w를 inorder traversal로 찾기
+                    - inorder traversal을 통해 v의 뒷순서인 internal node w를 inorder traversal로 찾기 ♣♣♣
                     -> key(w)를 node v에 복사
                     -> node w, node w의 leaf child z 제거 = removeExternal(z)
                 (4) 성능
@@ -737,19 +737,19 @@
                         [1] Insertion
                             - External node의 확장 발생
                                 -> imbalance 발생
-                                -> rebalancing 필요
+                                -> restructuring 필요
                         [2] Deletion
                             - External node의 제거 발생
                                 -> imbalance 발생
                                 -> rebalancing 필요
                             - Rebalancing
-                                제거된 node의 부모 node부터 traveling up해서 첫번째 unbalanced node 찾기
+                                제거된 node의 부모 node부터 traveling up해서 첫번째 unbalanced node 찾기 ♣♣♣
                                 -> 해당 unbalanced node 기준으로 더 큰 높이를 가진 자식 node가 올라가도록 Rotation ♣♣♣
                         [3] Restructuring
                             - 형제 위치에 있는 internal node간 자식 높이차가 2 이상일 때, 자식의 높이가 더 큰쪽을 위로 올림.
                                 만약, [왼쪽에 있는 자식]을 [부모]로 올리려면, [왼쪽에 있는 자식]의 [오른쪽에 자식]이 있으면 안된다.
                                 이런 경우에는 [왼쪽에 있는 자식의 오른쪽에 해당하는 자식]을 2번 rotation해서 [부모] 위치까지 올린다.
-                            - 반대의 경우도 좌우를 바꿔서 생각하면 된다 ♣♣♣
+                            - 반대의 경우도 좌우를 바꿔서 생각하면 된다 ♣♣♣ 바닥에서부터 규칙이 깨진 지점을 찾아 올라갈때, 가장 먼저 나온 깨진 지점만 보면 된다
 
                             1]] Single rotation
                             2]] Double rotation
@@ -766,7 +766,7 @@
                         [3] 시간복잡도 : O(h) ♣♣♣
                             - 최악 시간복잡도 : O(n)
                             - 최선 시간복잡도 : O(1)
-                            - 많은 경우 O(1) but 최악 O(n)이므로 속도 일정x. real-time system에서 사용하기 어려울 수 있음
+                            - 많은 경우 O(1) but 최악 O(n)이므로 속도 일정x. real-time system에서 사용하기 어려울 수 있음 ♣♣♣
                     3] 동작
                         [1] Zig = Right Rotation
                         [2] Zag = Left Rotation
@@ -812,8 +812,8 @@
                             1]] Root : 항상 black
                             2]] Leaf : 항상 black
                             3]] red node의 자식 : 항상 black (no double red)
-                            4]] depth : 모든 leaf에서 항상 같은 black depth
-                        [3] 시간복잡도 : O(logn) 일정
+                            4]] depth : 모든 leaf에서 항상 같은 black depth ♣♣♣
+                        [3] 시간복잡도 : O(logn) 일정 ♣♣♣
                     3] 동작
                         [1] Insertion
                             if. Child-Parent사이 Double Red 발생

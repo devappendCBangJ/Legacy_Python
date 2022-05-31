@@ -18,7 +18,7 @@
                 2] Graphs
     2. 알고리즘
         1) 개념 : 특정 결과를 위한 규칙, 절차 수립
-            - 입력 >> 알고리즘 >> 출력
+            - 입력 -> 알고리즘 -> 출력
         2) 특징
             (1) 명백한 모든 단계
             (2) 잘 정의된 데이터
@@ -226,7 +226,7 @@
                     Q.dequeue()
                 2] Auxiliary Queue Operations
                     Q.first() ♣
-                    Q.peek(index) ♣
+                    Q.peek(index) ♣♣♣
                     len(Q)
                     is_empty(Q)
                     is_full(Q)
@@ -317,22 +317,22 @@
                     [1] Head부터 Tail까지 가면서 previous 기억 ♣
                     [2] 새 노드 할당
                     [3] 새 노드에 원소 삽입
-                    [4] 새 노드 주소가 Middle 노드 가리킴
+                    [4] 새 노드 주소가 Middle 노드 가리킴 ♣♣♣
                     [5] previous 노드 주소가 새 노드 가리킴
                 3] Removing at Middle
                     [1] Head부터 Tail까지 가면서 previous 기억 ♣
-                    [2] Middle 노드가 나오면 previous 주소가 Middle+1 노드 가리킴
+                    [2] Middle 노드가 나오면 previous 주소가 Middle+1 노드 가리킴 ♣♣♣
                     [3] Garbage Collector가 기존 Middle 제거
             (3) 활용
                 1] Linked list stack
                     - top element : first node ♣♣
-                        Singly linked list의 단점으로 인해 first node를 빼는 용도로 사용 ♣
+                        Singly linked list의 단점으로 인해 first node를 빼는 용도로 사용 ♣♣♣
                     - Space : O(n)
                     - Stack ADT : O(1)
                 2] Linked list queue
-                    - front element : first node ♣♣
-                        Singly linked list의 단점으로 인해 first node를 빼는 용도로 사용 ♣
-                    - rear element : last node ♣♣
+                    - front element : first node ♣♣♣
+                        Singly linked list의 단점으로 인해 first node를 빼는 용도로 사용 ♣♣♣
+                    - rear element : last node ♣♣♣
                     - Space : O(n)
                     - Stack ADT : O(1)
 
@@ -366,7 +366,7 @@
                     [2] 다음 노드의 previous 주소가 이전 노드 가리킴
                     [3] Garbage Collector가 기존 노드 제거
             (3) 활용
-                1] Positional list : 이름으로 위치 나타냄 ♣♣
+                1] Positional list : 이름으로 위치 나타냄 ♣♣♣
                     - 잘 사용하지 않는다
         3) 총정리
             (1) 일반 list
@@ -374,7 +374,7 @@
             (2) singly linked list
                 - 메모리 공간 2배
                 - 역방향 불가능. 한쪽 방향 원소 조작 용이 ♣
-                - head, middle, tail 노드에서 각기 다른 방식 연산 ♣
+                - head, middle, tail 노드에서 각기 다른 방식 연산 ♣♣♣
             (3) doubly linked list
                 - 메모리 공간 3배
                 - 역방향 가능. 양쪽 방향 원소 조작 용이 ♣
@@ -383,7 +383,7 @@
     7. Tree
         1) 개요
             (1) 특징 ♣
-                - 계층 구조의 추상적 모델
+                - 계층 구조의 추상적 모델 ♣♣♣
                 - 각 노드 : 부모 관계
             (2) 예시 ♣
                 ex1. 조직 차트
@@ -391,17 +391,17 @@
                 ex3. 프로그래밍 환경
             (3) 용어 ♣
                 1] Root : 부모 없는 노드
-                2] Internal node : 적어도 1개 자식 있는 노드(root도 Internal node이다)
+                2] Internal node : 적어도 1개 자식 있는 노드(root도 Internal node이다) ♣♣♣
                 3] External node : 자식 없는 노드
 
-                1] Depth of a node : 조상의 개수 ♣
-                2] Height of a node : 노드의 최대 Depth ♣
+                1] Depth of a node : 조상의 개수 ♣♣♣
+                2] Height of a node : 노드의 최대 Depth ♣♣♣
 
                 1] subtree ♣
 
                 - ancestors of a node : 부모, 조부모, 조조부모, ...
                 - descendant of a node : 자식, 손자, 손손자, ...
-            (4) 구현 방법 ♣
+            (4) 구현 방법 ♣♣♣
                 1] list
                 2] doubly linked list
         2) Tree ADT ♣♣
@@ -428,13 +428,13 @@
                     - subtree의 모음이라고 생각
                     [1] Preorder traversal : VLR(root -> left -> right)
                         - 특징 : root가 가장 먼저
-                        ex. 구조화된 문서 출력
+                        ex. 구조화된 문서 출력 ♣♣♣
                     [2] Inorder traversal : LVR(left -> root -> right)
                         - 특징 : root가 중간
                     [3] Postorder traversal : LRV(left -> right -> root)
                         - 특징 : root가 마지막
-                        ex. 폴더 내 파일 사용 공간 계산
-                3] 구현
+                        ex. 폴더 내 파일 사용 공간 계산 ♣♣♣
+                3] 구현 ♣♣
                     [1] Preorder Traversal ♣
                         Algorithm preOrder(v)
                             visit(v)
@@ -447,7 +447,7 @@
                             visit(v)
         4) 종류
             (2) Binary Trees ♣♣
-                1] Proper Binary Trees 특징 ♣♣
+                1] Proper Binary Trees 특징 ♣♣♣
                     [1] 각 node : 최대 2개 자식(ordered pair = left node, right node)
                     [2] e = i + 1
                     [2] n = 2e - 1 = i + e
@@ -489,7 +489,7 @@
                             if v has a right child
                                 printExpression(right(v))
                                 print(")")
-                    [2] Print Arithmetic Expressions(recursive)(Postorder traversal) - Binary Tree ♣♣
+                    [2] Print Arithmetic Expressions(recursive)(Postorder traversal) - Binary Tree ♣♣♣
                         Algorithm evalExpr(v)
                             if is_leaf(v)
                                 return v.element()
@@ -508,18 +508,18 @@
                         2]] 자식 1개 node : 2번 방문
                         3]] 자식 2개 node : 3번 방문
                 5] 구현 방법 종류
-                    [1] Linked Structure - Binary Tree(1개 노드 당 3개 공간) ♣♣
+                    [1] Linked Structure - Binary Tree(1개 노드 당 3개 공간) ♣♣♣
                         - 3가지 저장
                             데이터
                             부모 노드
                             자식 노드
-                    [2] Linked Structure - Binary Tree(1개 노드 당 4개 공간) ♣♣
+                    [2] Linked Structure - Binary Tree(1개 노드 당 4개 공간) ♣♣♣
                         - 4가지 저장
                             데이터
                             부모 노드
                             왼쪽 자식 노드
                             오른쪽 자식 노드
-                    [3] Array based Binary Tree ♣♣
+                    [3] Array based Binary Tree ♣♣♣
                         - Full binary tree를 array based로 구현 : 효율성 높음
                         - 듬성듬성한 binary tree를 array based로 구현 : 효율성 낮음
 
@@ -559,7 +559,7 @@
             2] sorted linked list : enqueue 시 sort
                 - enqueue() : O(n)
                 - dequeue() : O(1)
-            3] heap
+            3] heap ♣♣♣
                 - enqueue() : O(logn)
                 - dequeue() : O(logn)
 
@@ -578,15 +578,15 @@
                     1]] add
                     2]] remove_min
                 [2] 종류
-                    1]] Selection Sort in PQ : dequeue할 때 sort
+                    1]] Selection Sort in PQ : dequeue할 때 sort ♣♣♣
                         - insert : O(n)
                         - remove_min : n(n+1)/2 = O(n^2)
 
-                    2]] Insertion Sort in PQ : enqueue할 때 sort
+                    2]] Insertion Sort in PQ : enqueue할 때 sort ♣♣♣
                         - insert : n(n+1)/2 = O(n^2)
                         - remove_min : O(n)
 
-                        Algorithm PQSort(S, C) ♣♣
+                        Algorithm PQSort(S, C) ♣♣♣
                             input : sequence S, S의 원소에 대한 Comparator C
                             output : C에 따라 증가하는 순서로 정렬된 sequence S
                             while ~S.is_empty()
@@ -597,12 +597,12 @@
                                 S.add_last(e)
                     3]] In-place Insertion Sort in PQ : 추가 메모리 사용x. swap
             2] Heap
-                [1] 개념 : Complete binary tree 이용한 Priority Queue 구현
+                [1] 개념 : Complete binary tree 이용한 Priority Queue 구현 ♣♣♣
                 [2] 특징
                     1]] Complete binary tree : 마지막 level에서 조금 비어있는 tree
-                    2]] Heap order : root가 아닌 모든 internal node의 부자 관계는 key(v) >= key(parent(v))
+                    2]] Heap order : root가 아닌 모든 internal node의 부자 관계는 key(v) >= key(parent(v)) ♣♣♣
                     3]] last node : 최대 depth의 최우측 node
-                    4]] Heap의 height : O(logn) ♣♣
+                    4]] Heap의 height : O(logn) ♣♣♣
                         key : 2^i개 (i = 0, 1, ..., h-1 depth)
                             적어도 1개 (i = h depth)
                         2^h <= n
@@ -625,7 +625,7 @@
                         - down heap
                             목적 : heap order property(internal node의 부자 관계 : key(v) >= key(parent(v))를 지키기 위함
                             시간복잡도 : O(logn)
-                        -  update last node
+                        -  update last node ♣♣♣
                             -> 왼쪽에 부모 있으면 따라감. 왼쪽에 부모가 없을 때까지 따라감
                             -> 오른쪽에 부모 있으면 따라감. 오른쪽에 부모가 없을 때까지 따라감
                             -> 최대한 왼쪽에 있는 자식을 따라감. 왼쪽 자식이 없을 때까지 따라감
@@ -636,21 +636,21 @@
                         시간복잡도
                             space : O(n)
                             add : O(logn)
-                            len, is_empty, min : O(1)
-                            sort : O(nlogn)
+                            len, is_empty, min : O(1) ♣♣♣
+                            sort : O(nlogn) ♣♣♣
                     4]] merge two heaps
                         -> 2개 heap, 1개 key k 존재
                         -> root node에 k 넣고 2개 heap을 subtree로 해서 합쳐
-                        -> heap order property 복원 by downheap
+                        -> heap order property 복원 by downheap ♣♣♣
 
-                        - bottom up heap construction
+                        - bottom up heap construction ♣♣♣
                             목적 : 2개 heap을 merge하기 위함
                             시간복잡도 : O(logn)
                                 2^i - 1 keys를 가진 heap 2개를 2^(i+1) - 1의 keys를 가진 heap 1개로 병합
                 [4] 구현 방법 종류
                     1]] 배열 기반 heap ♣♣
                         [[1]] 개념 : 배열을 이용 heap 구현
-                        [[2]] 특징 ♣♣ Array Based Binary Tree와 인덱스를 다르게 매긴다
+                        [[2]] 특징 ♣♣♣ Array Based Binary Tree와 인덱스를 다르게 매긴다
                             1]]] 인덱스
                                 - node number
                                     왼쪽 자식 : 2i + 1
@@ -660,7 +660,7 @@
                                 - remove_min
                                     n 인덱스의 원소 삭제
                             2]]] 높은 성능
-                [5] 예시
+                [5] 예시 ♣♣♣
                     - 강의자료 참조
 
 
